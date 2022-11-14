@@ -2,7 +2,7 @@ import eslintPlugin from 'vite-plugin-eslint'
 import AutoImport from 'unplugin-auto-import/vite'
 import Components from 'unplugin-vue-components/vite'
 import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
-import en from './locales/en.json'
+import en from './locales/en'
 import vi from './locales/vi.json'
 import zh from './locales/zh.json'
 
@@ -43,8 +43,8 @@ export default defineNuxtConfig({
   i18n: {
     vueI18n: {
       legacy: false,
-      locale: 'zh',
-      fallbackLocale: 'zh',
+      locale: 'en',
+      fallbackLocale: 'en',
       messages: {
         en,
         vi,

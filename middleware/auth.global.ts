@@ -9,7 +9,8 @@ export default defineNuxtRouteMiddleware((to) => {
   }
 
   if (to.name !== $routesList.login && accessToken.value && !isAuthorized.value) {
-    const isTokenValid = false
+    // TODO: Actual token check
+    const isTokenValid = !!accessToken.value
     isAuthorized.value = true
 
     if (!isTokenValid) {

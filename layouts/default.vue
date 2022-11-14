@@ -12,10 +12,12 @@ useHead(computedHeader)
 </script>
 
 <template>
-  <div
-  >
-    <slot />
-  </div>
+  <el-container class="h-screen">
+    <the-navigation-sidebar />
+    <el-main>
+      <slot />
+    </el-main>
+  </el-container>
 </template>
 
 <style scoped></style>
