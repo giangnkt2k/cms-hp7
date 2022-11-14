@@ -3,9 +3,10 @@ import { MetaObject } from '#app'
 
 const route = useRoute()
 const { t } = useUtility()
+useDark()
 
 const computedHeader = computed<MetaObject>(() => ({
-  title: t(route.meta.pageTitle || 'page.home.title')
+  title: t(route.meta.pageTitle || 'home.page.title')
 }))
 
 useHead(computedHeader)
@@ -13,10 +14,17 @@ useHead(computedHeader)
 
 <template>
   <el-container class="h-screen">
-    <the-navigation-sidebar />
-    <el-main>
-      <slot />
-    </el-main>
+    <el-header class="border-b border-[var(--el-border-color)] flex items-center">
+      <h1 class="text-xl font-medium">
+        {{ computedHeader.title }}
+      </h1>
+    </el-header>
+    <el-container>
+      <the-navigation-sidebar />
+      <el-main>
+        <slot />
+      </el-main>
+    </el-container>
   </el-container>
 </template>
 
