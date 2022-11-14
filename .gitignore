@@ -9,3 +9,4 @@ dist
 generated
 plugins/__typed-router.ts
 components.d.ts
+auto-imports.d.ts
