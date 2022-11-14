@@ -1,4 +1,4 @@
-export default defineNuxtRouteMiddleware(async (to) => {
+export default defineNuxtRouteMiddleware((to) => {
   const { $routesList } = useNuxtApp()
 
   const accessToken = useAccessToken()

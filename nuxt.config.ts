@@ -1,4 +1,7 @@
 import eslintPlugin from 'vite-plugin-eslint'
+import AutoImport from 'unplugin-auto-import/vite'
+import Components from 'unplugin-vue-components/vite'
+import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
 import en from './locales/en.json'
 import vi from './locales/vi.json'
 import zh from './locales/zh.json'
@@ -54,6 +57,12 @@ export default defineNuxtConfig({
   vite: {
     plugins: [
       eslintPlugin(),
+      AutoImport({
+        resolvers: [ElementPlusResolver()]
+      }),
+      Components({
+        resolvers: [ElementPlusResolver()]
+      })
     ]
   },
 

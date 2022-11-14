@@ -2,7 +2,7 @@
 
 <template>
   <div>
-    Page: foo
+    <el-button>ANV</el-button>
   </div>
 </template>
 
