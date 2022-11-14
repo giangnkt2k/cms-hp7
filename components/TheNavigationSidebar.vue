@@ -5,7 +5,7 @@ const navigationItems = useNavigationItems()
 <template>
   <el-aside>
     <el-scrollbar>
-      <el-menu class="h-screen">
+      <el-menu class="h-screen" router>
         <NavigationBarSubItem v-for="(item, index) in navigationItems" :key="index" :item="item" />
       </el-menu>
     </el-scrollbar>
