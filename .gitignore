@@ -1,0 +1,11 @@
+node_modules
+*.log*
+.nuxt
+.nitro
+.cache
+.output
+.env
+dist
+generated
+plugins/__typed-router.ts
+components.d.ts
