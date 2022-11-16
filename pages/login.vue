@@ -7,7 +7,8 @@ definePageMeta({
 
 const { $typedRouter, $routesList } = useNuxtApp()
 const { required } = useValidators()
-const accessToken = useAccessToken()
+const { loginService } = useApiServices()
+const { accessToken, username } = useAuthentication()
 
 const form = reactive({
   username: '',
@@ -23,10 +24,19 @@ const rules = {
   }
 }
 
-const login = () => {
-  // TODO: Implement login logic
-  accessToken.value = 'asdasdas'
-  $typedRouter.push({ name: $routesList.index })
+const isLoggingIn = ref(false)
+
+const login = async () => {
+  isLoggingIn.value = true
+  const response = await loginService(form.username, form.password)
+
+  if (response.data) {
+    accessToken.value = response.data.accessToken
+    username.value = response.data.username
+  }
+
+  await $typedRouter.push({ name: $routesList.index })
+  isLoggingIn.value = false
 }
 
 const $v = useVuelidate(rules, form)
@@ -45,7 +55,7 @@ const $v = useVuelidate(rules, form)
         </el-form-item>
 
         <el-form-item>
-          <el-button class="w-full" type="primary" :disabled="$v.$invalid" native-type="submit">
+          <el-button class="w-full" type="primary" :disabled="$v.$invalid" native-type="submit" :loading="isLoggingIn">
             {{ $t('login.form.submit.label') }}
           </el-button>
         </el-form-item>

@@ -7,5 +7,9 @@ export default {
   'login.form.submit.label': 'Login',
   // Validation messages
   'validation-messages.username.required': 'Please provide username',
-  'validation-messages.password.required': 'Please provide password'
+  'validation-messages.password.required': 'Please provide password',
+  // Header
+  'header.logout-button.label': 'Logout',
+  // Error messages
+  'api.error.general': 'Error'
 }

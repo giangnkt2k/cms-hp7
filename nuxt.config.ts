@@ -16,6 +16,11 @@ export default defineNuxtConfig({
     shim: false,
     typeCheck: true
   },
+  imports: {
+    dirs: [
+      'composables/**'
+    ]
+  },
 
   app: {
     // Head

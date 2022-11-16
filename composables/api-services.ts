@@ -1,23 +1,36 @@
+import { ApiRoutes } from '~~/types/api'
+import { ILoginResponse } from '~~/types/authentication'
+
 export const useApiServices = () => {
-  const { $api } = useNuxtApp()
+  const { $api: api } = useNuxtApp()
+  const { logout } = useAuthentication()
   const { showApiError, t } = useUtility()
   const accessToken = useAccessToken()
 
   //   Request intercept
-  $api.interceptors.request.use((config) => {
+  api.interceptors.request.use((config) => {
     config.headers = {
-      authorization: accessToken.value || 'undefined',
+      authorization: `Bearer ${accessToken.value}`,
       ...config.headers
+    }
+
+    if (process.dev) {
+      // eslint-disable-next-line no-console
+      console.log({ config })
     }
 
     return config
   })
 
   // Response Interceptor
-  $api.interceptors.response.use(
+  api.interceptors.response.use(
     (response) => {
       if (response.data.code !== 0) {
         showApiError(response.data.msg)
+      }
+
+      if (response.status === 401) {
+        logout()
       }
 
       return response
@@ -25,7 +38,7 @@ export const useApiServices = () => {
     (error) => {
       if (process.dev) {
         // eslint-disable-next-line no-console
-        console.log(error)
+        console.log({ error })
       }
 
       showApiError(t('api.error.general'))
@@ -33,8 +46,11 @@ export const useApiServices = () => {
     }
   )
 
-  
+  const loginService = (username: string, password: string) => {
+    return api.post<ILoginResponse>(ApiRoutes.LOGIN, { username, password })
+  }
 
   return {
+    loginService
   }
 }
