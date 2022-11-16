@@ -30,13 +30,12 @@ const login = async () => {
   isLoggingIn.value = true
   const response = await loginService(form.username, form.password)
 
-  if (response.data) {
+  if (response?.data) {
     accessToken.value = response.data.accessToken
     username.value = response.data.username
+    await $typedRouter.push({ name: $routesList.index })
+    isLoggingIn.value = false
   }
-
-  await $typedRouter.push({ name: $routesList.index })
-  isLoggingIn.value = false
 }
 
 const $v = useVuelidate(rules, form)

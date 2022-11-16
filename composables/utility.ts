@@ -1,12 +1,14 @@
 import numeral from 'numeral'
+import { ElNotification } from 'element-plus'
 
 export const useUtility = () => {
   const { $dayjs } = useNuxtApp()
   const { t } = useI18n()
 
+  const notify = ElNotification
+
   const showApiError = (message: string) => {
-    // TODO: Implement toaster
-    console.log(message)
+    notify.error(message)
   }
 
   const toMoneyFormat = (amount: number | string, format = '0.00') => {
