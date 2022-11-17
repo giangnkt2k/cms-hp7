@@ -5,9 +5,13 @@ definePageMeta({
   pageTitle: 'members.page.title'
 })
 
+const { appUserListService } = useApiServices()
+
 const currentPage = ref(1)
 const pageSize = ref<TablePageSize>(100)
 const totalCount = ref(1000)
+
+appUserListService({ page: currentPage.value, limit: pageSize.value })
 </script>
 
 <template>

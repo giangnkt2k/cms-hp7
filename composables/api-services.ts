@@ -45,7 +45,12 @@ export const useApiServices = () => {
     return api.post<ILoginResponse>(ApiRoutes.LOGIN, { username, password })
   }
 
+  const appUserListService = (data: { page: number, limit: number }) => {
+    return api.get(ApiRoutes.APP_USER_LIST, { params: data })
+  }
+
   return {
-    loginService
+    loginService,
+    appUserListService
   }
 }
