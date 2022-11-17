@@ -1,4 +1,4 @@
 export enum ApiRoutes {
-    LOGIN = '/api/v1/auth/login',
-    APP_USER_LIST = '/cms/app-users'
+    LOGIN = '/api/v1/auth/login/cms',
+    APP_USER_LIST = '/api/v1/cms/app-users'
 }
