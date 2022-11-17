@@ -5,9 +5,9 @@ definePageMeta({
 </script>
 
 <template>
-  <div>
+  <el-table>
     Page: foo
-  </div>
+  </el-table>
 </template>
 
 <style scoped></style>

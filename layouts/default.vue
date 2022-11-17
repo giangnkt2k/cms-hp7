@@ -1,15 +1,13 @@
 <script lang="ts" setup>
-import { MetaObject } from '#app'
-
 const route = useRoute()
 const { t } = useUtility()
 const { isAuthenticated, logout } = useAuthentication()
 
-const computedHeader = computed<MetaObject>(() => ({
-  title: t(route.meta.pageTitle || 'home.page.title')
-}))
+const pageTitle = computed(() => t(route.meta.pageTitle || 'home.page.title'))
 
-useHead(computedHeader)
+useHead({
+  title: pageTitle
+})
 useDark()
 </script>
 
@@ -17,7 +15,7 @@ useDark()
   <el-container class="h-screen">
     <el-header v-if="isAuthenticated" class="border-b border-[var(--el-border-color)] flex items-center">
       <h1 class="text-xl font-medium">
-        {{ computedHeader.title }}
+        {{ t(route.meta.pageTitle || 'home.page.title') }}
       </h1>
       <div class="flex-grow" />
       <el-button type="danger" round plain @click="logout">

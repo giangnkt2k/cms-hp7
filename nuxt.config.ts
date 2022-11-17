@@ -37,12 +37,11 @@ export default defineNuxtConfig({
   modules: [
     'nuxt-windicss',
     '@pinia/nuxt',
-    '@nuxtjs/robots',
     '@nuxtjs/i18n',
     '@vueuse/nuxt',
-    'nuxt-lodash'
+    'nuxt-lodash',
+    'nuxt-typed-router'
   ],
-  buildModules: ['nuxt-typed-router'],
 
   // i18n config
   i18n: {

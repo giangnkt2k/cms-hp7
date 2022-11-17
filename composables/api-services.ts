@@ -25,10 +25,6 @@ export const useApiServices = () => {
   // Response Interceptor
   api.interceptors.response.use(
     (response) => {
-      if (response.data.code !== 0) {
-        showApiError(response.data.msg)
-      }
-
       if (response.status === 401) {
         logout()
       }
@@ -40,7 +36,6 @@ export const useApiServices = () => {
         // eslint-disable-next-line no-console
         console.log({ error })
       }
-
       showApiError(t('api.error.general'))
       return null
     }
