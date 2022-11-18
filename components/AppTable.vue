@@ -2,10 +2,10 @@
 import { TablePageSize } from '~~/types/app-table'
 
 type Props = {
-  data: Record<string, unknown>[],
-  total: number
-  currentPage: number
-  pageSize: TablePageSize
+  data: Record<string, unknown>[];
+  total: number;
+  currentPage: number;
+  pageSize: TablePageSize;
 }
 
 type Emits = {
@@ -23,11 +23,12 @@ defineEmits<Emits>()
       <slot />
     </el-table>
     <el-pagination
+      hide-on-single-page
       :current-page="currentPage"
       :page-size="pageSize"
       :page-sizes="[100, 200, 300, 400]"
       layout="sizes, prev, pager, next"
-      :total="1000"
+      :total="total"
       @size-change="$emit('update:page-size', $event)"
       @current-change="$emit('update:current-page', $event)"
     />

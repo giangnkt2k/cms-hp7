@@ -1,5 +1,6 @@
-import { ApiRoutes } from '~~/types/api'
+import { ApiRoutes, PaginatedResponse } from '~~/types/api'
 import { ILoginResponse } from '~~/types/authentication'
+import { IMember } from '~~/types/member'
 
 export const useApiServices = () => {
   const { $api: api } = useNuxtApp()
@@ -49,7 +50,7 @@ export const useApiServices = () => {
   }
 
   const appUserListService = (data: { page: number, limit: number }) => {
-    return api.get(ApiRoutes.APP_USER_LIST, { params: data })
+    return api.get<PaginatedResponse<IMember[]>>(ApiRoutes.APP_USER_LIST, { params: data })
   }
 
   return {
