@@ -13,7 +13,10 @@ const pageSize = ref<TablePageSize>(100)
 const totalCount = ref(0)
 const members = ref<IMember[]>([])
 
-const getAppUsers = async () => {
+const getAppUsers = async (page?: number) => {
+  if (page) {
+    currentPage.value = page
+  }
   const response = await appUserListService({ page: currentPage.value, limit: pageSize.value })
 
   if (response?.data) {
@@ -26,15 +29,34 @@ getAppUsers()
 </script>
 
 <template>
-  <app-table v-model:current-page="currentPage" v-model:page-size="pageSize" :data="members" :total="totalCount">
+  <app-table
+    v-model:current-page="currentPage"
+    v-model:page-size="pageSize"
+    :data="members"
+    :total="totalCount"
+    @update:current-page="getAppUsers"
+    @update:page-size="getAppUsers(1)"
+  >
     <el-table-column prop="id" type="expand">
-      <el-table :data="[]" border>
-        <el-table-column label="Name" prop="name" />
-        <el-table-column label="State" prop="state" />
-        <el-table-column label="City" prop="city" />
-        <el-table-column label="Address" prop="address" />
-        <el-table-column label="Zip" prop="zip" />
-      </el-table>
+      <template #default="{row}">
+        <el-table :data="[row]" border>
+          <el-table-column :label="$t('members.table.headers.real-name')" prop="real_name" />
+          <el-table-column :label="$t('members.table.headers.id-no')" prop="id_number_cccd" />
+          <el-table-column :label="$t('members.table.headers.id-front')" prop="id_front_cccd">
+            <template #default="{row: subRow}">
+              <el-image class="w-100px aspect-video" :src="subRow.id_front_cccd" />
+            </template>
+          </el-table-column>
+          <el-table-column :label="$t('members.table.headers.id-back')" prop="id_back_cccd">
+            <template #default="{row: subRow}">
+              <el-image class="w-100px aspect-video" :src="subRow.id_back_cccd" />
+            </template>
+          </el-table-column>
+          <el-table-column :label="$t('members.table.headers.bank-name')" prop="bank_name" />
+          <el-table-column :label="$t('members.table.headers.account-no')" prop="bank_number" />
+          <el-table-column :label="$t('members.table.headers.holder')" prop="account_name" />
+        </el-table>
+      </template>
     </el-table-column>
 
     <el-table-column min-width="50" prop="id" :label="$t('members.table.headers.id')" />

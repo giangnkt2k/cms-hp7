@@ -41,7 +41,7 @@ export const useApiServices = () => {
       }
 
       showApiError(t('api.error.general'))
-      return null
+      return Promise.reject(error)
     }
   )
 

@@ -27,5 +27,15 @@ export default {
   'members.table.headers.is-playing-board': 'Playing Board?',
   'members.table.headers.last-login-ip': 'Last IP',
   'members.table.headers.create-by': 'Create By',
-  'members.table.headers.actions': 'Actions'
+  'members.table.headers.actions': 'Actions',
+  // Sub member table
+  'members.table.headers.real-name': 'Real name',
+  'members.table.headers.id-no': 'ID No.',
+  'members.table.headers.id-front': 'Front',
+  'members.table.headers.id-back': 'Back',
+  'members.table.headers.bank-name': 'Bank',
+  'members.table.headers.account-no': 'Account No.',
+  'members.table.headers.holder': 'Holder',
+  'members.table.headers.approver': 'Approver',
+  'members.table.headers.reviewed-at': 'Reviewed At'
 }

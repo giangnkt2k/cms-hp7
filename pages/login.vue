@@ -8,7 +8,7 @@ definePageMeta({
 const { $typedRouter, $routesList } = useNuxtApp()
 const { required } = useValidators()
 const { loginService } = useApiServices()
-const { accessToken, username } = useAuthentication()
+const { accessToken } = useAuthentication()
 
 const form = reactive({
   username: '',
@@ -28,14 +28,15 @@ const isLoggingIn = ref(false)
 
 const login = async () => {
   isLoggingIn.value = true
-  const response = await loginService(form.username, form.password)
+  const response = await loginService(form.username, form.password).catch(() => {
+    // TODO
+  })
 
   if (response?.data) {
-    accessToken.value = response.data.accessToken
-    username.value = response.data.username
+    accessToken.value = response.data.token
     await $typedRouter.push({ name: $routesList.index })
-    isLoggingIn.value = false
   }
+  isLoggingIn.value = false
 }
 
 const $v = useVuelidate(rules, form)
