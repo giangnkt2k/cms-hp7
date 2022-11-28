@@ -5,7 +5,9 @@ export interface IMember {
     username: string;
     is_real: boolean;
     is_verified: boolean;
-    real_name: null;
+    is_active: boolean;
+    is_freeze: boolean;
+    real_name: string | null;
     id_number_cccd: string;
     id_front_cccd: string;
     id_back_cccd: string;
@@ -31,6 +33,8 @@ export interface IMember {
     is_playing_board: boolean;
     ipo_application: boolean;
     created_by: string;
-    created_at: null;
+    created_at: string | null;
+    password: string;
+    withdraw_password: string;
     __entity: string;
 }

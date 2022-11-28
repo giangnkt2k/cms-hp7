@@ -14,7 +14,7 @@ defineProps<{
 
     <NavigationBarSubItem v-for="(childItem, index) in item.child" :key="index" :item="childItem" />
   </el-sub-menu>
-  <el-menu-item v-else :route="item.route" :index="item.id">
+  <el-menu-item v-else :route="item.route" :index="item.routeName">
     {{ item.name }}
   </el-menu-item>
 </template>

@@ -5,6 +5,7 @@ export const useNavigationItems = () => useState<INavigationItem[]>('navigation-
   {
     id: v4(),
     name: 'Dashboard',
+    routeName: 'dashboard',
     route: '/'
   },
   {
@@ -14,7 +15,8 @@ export const useNavigationItems = () => useState<INavigationItem[]>('navigation-
       {
         id: v4().toString(),
         name: 'Member List',
-        route: '/members'
+        route: '/members',
+        routeName: 'members'
       }
     ]
   }

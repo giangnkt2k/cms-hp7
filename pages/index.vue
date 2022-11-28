@@ -1,6 +1,9 @@
 <script lang="ts" setup>
+import { RouteNames } from '~~/types/routes'
+
 definePageMeta({
-  pageTitle: 'home.page.title'
+  pageTitle: 'home.page.title',
+  pageRouteName: RouteNames.DASHBOARD
 })
 </script>
 

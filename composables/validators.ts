@@ -10,7 +10,17 @@ export const useValidators = () => {
   const withI18nMessage = createI18nMessage({ t, messagePath })
 
   const required = withI18nMessage(validators.required)
+  const sameAs = withI18nMessage(validators.sameAs, {
+    withArguments: true
+  })
+  const alpha = withI18nMessage(validators.alpha)
+  const alphaNum = withI18nMessage(validators.alphaNum)
+  const numeric = withI18nMessage(validators.numeric)
   return {
-    required
+    required,
+    sameAs,
+    alphaNum,
+    alpha,
+    numeric
   }
 }

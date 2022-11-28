@@ -6,6 +6,7 @@ type Props = {
   total: number;
   currentPage: number;
   pageSize: TablePageSize;
+  isLoading?: boolean
 }
 
 type Emits = {
@@ -19,8 +20,11 @@ defineEmits<Emits>()
 
 <template>
   <div class="w-full">
-    <el-table :data="data">
+    <el-table v-loading="isLoading" :data="data">
       <slot />
+      <template #empty>
+        <el-empty />
+      </template>
     </el-table>
     <el-pagination
       hide-on-single-page
