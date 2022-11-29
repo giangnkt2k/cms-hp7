@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 const navigationItems = useNavigationItems()
 const route = useRoute()
-const defaultActive = route.meta.pageRouteName
+const defaultActive = computed(() => route.meta.pageRouteName)
 </script>
 
 <template>
