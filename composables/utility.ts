@@ -3,7 +3,6 @@ import { ElNotification } from 'element-plus'
 
 export const useUtility = () => {
   const { $dayjs } = useNuxtApp()
-  const { t } = useI18n()
 
   const notify = ElNotification
 
@@ -22,7 +21,6 @@ export const useUtility = () => {
   return {
     showApiError,
     toMoneyFormat,
-    dateFormatter,
-    t
+    dateFormatter
   }
 }

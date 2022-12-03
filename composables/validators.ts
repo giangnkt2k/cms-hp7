@@ -1,13 +1,13 @@
 import * as validators from '@vuelidate/validators'
 
 export const useValidators = () => {
-  const { t } = useUtility()
+  const { $t } = useNuxtApp()
   const { createI18nMessage } = validators
 
   const messagePath = (data: { $validator: string; $propertyPath: string }) =>
   `validation-messages.${data.$propertyPath}.${data.$validator}`
 
-  const withI18nMessage = createI18nMessage({ t, messagePath })
+  const withI18nMessage = createI18nMessage({ t: $t, messagePath })
 
   const required = withI18nMessage(validators.required)
   const sameAs = withI18nMessage(validators.sameAs, {

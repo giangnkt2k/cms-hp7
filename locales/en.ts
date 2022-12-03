@@ -70,5 +70,8 @@ export default {
   'members.buttons.modify-balance.label': 'Modify balance',
   'members.buttons.lock-account.label': 'Lock',
   'members.lock-user.confirm-message': 'Are you sure to lock this user?',
-  'members.lock-user.success': 'User has been locked'
+  'members.lock-user.success': 'User has been locked',
+  'members.buttons.unlock-account.label': 'Unlock',
+  'members.unlock-user.confirm-message': 'Are you sure to unlock this user?',
+  'members.unlock-user.success': 'User has been unlocked'
 }

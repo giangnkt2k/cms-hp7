@@ -11,8 +11,7 @@ definePageMeta({
 })
 
 const { appUserListService, deleteUserService, updateUserService } = useApiServices()
-const { $notify, $message } = useNuxtApp()
-const { t } = useUtility()
+const { $notify, $message, $t } = useNuxtApp()
 
 const currentPage = ref(1)
 const pageSize = ref<TablePageSize>(100)
@@ -49,8 +48,8 @@ const formatColumnValue = (_: unknown, __: unknown, value: unknown) => {
 const deleteUser = async (id: number) => {
   const response = await deleteUserService(id)
   if (response?.status === 200) {
-    $notify.success(t('members.table.button.delete.success'))
-    getAppUsers(currentPage.value)
+    $notify.success($t('members.table.button.delete.success'))
+    getAppUsers()
   }
 }
 
@@ -70,11 +69,23 @@ const startResetUserWithdrawPassword = (member: IMember) => {
 }
 
 const startLockingUser = (member: IMember) => {
-  $message.confirm(t('members.lock-user.confirm-message')).then(async () => {
+  $message.confirm($t('members.lock-user.confirm-message')).then(async () => {
+    const response = await updateUserService(member.id, { is_freeze: true })
+
+    if (response?.status === 200) {
+      $notify.success($t('members.lock-user.success'))
+      getAppUsers()
+    }
+  })
+}
+
+const startUnlockingUser = (member: IMember) => {
+  $message.confirm($t('members.unlock-user.confirm-message')).then(async () => {
     const response = await updateUserService(member.id, { is_freeze: false })
 
     if (response?.status === 200) {
-      $notify.success(t('members.lock-user.success'))
+      $notify.success($t('members.unlock-user.success'))
+      getAppUsers()
     }
   })
 }
@@ -84,131 +95,139 @@ getAppUsers()
 
 <template>
   <div>
-    <el-button type="success" @click="isCreateUserVisible = true">
-      {{ $t('members.buttons.create.label') }}
-    </el-button>
-    <app-table
-      v-model:current-page="currentPage"
-      v-model:page-size="pageSize"
-      :data="members"
-      :total="totalCount"
-      :is-loading="isLoading"
-      @update:current-page="getAppUsers"
-      @update:page-size="getAppUsers(1)"
-    >
-      <el-table-column prop="id" type="expand">
-        <template #default="{row}">
-          <el-table :data="[row]" border>
-            <el-table-column :label="$t('members.table.headers.real-name')" prop="real_name" :formatter="formatColumnValue" />
-            <el-table-column :label="$t('members.table.headers.id-no')" prop="id_number_cccd" :formatter="formatColumnValue" />
-            <el-table-column :label="$t('members.table.headers.id-front')" prop="id_front_cccd">
-              <template #default="{row: subRow}">
-                <el-image class="w-100px aspect-video" :src="subRow.id_front_cccd" />
-              </template>
-            </el-table-column>
-            <el-table-column :label="$t('members.table.headers.id-back')" prop="id_back_cccd">
-              <template #default="{row: subRow}">
-                <el-image class="w-100px aspect-video" :src="subRow.id_back_cccd" />
-              </template>
-            </el-table-column>
-            <el-table-column :label="$t('members.table.headers.bank-name')" prop="bank_name" :formatter="formatColumnValue" />
-            <el-table-column :label="$t('members.table.headers.account-no')" prop="bank_number" :formatter="formatColumnValue" />
-            <el-table-column :label="$t('members.table.headers.holder')" prop="account_name" :formatter="formatColumnValue" />
-          </el-table>
-        </template>
-      </el-table-column>
+    <div class="text-right">
+      <el-button type="success" @click="isCreateUserVisible = true">
+        {{ $t('members.buttons.create.label') }}
+      </el-button>
+    </div>
+    <el-card class="mt-4" body-style="padding: 0">
+      <app-table
+        v-model:current-page="currentPage"
+        v-model:page-size="pageSize"
+        :data="members"
+        :total="totalCount"
+        :is-loading="isLoading"
+        @update:current-page="getAppUsers"
+        @update:page-size="getAppUsers(1)"
+      >
+        <el-table-column prop="id" type="expand">
+          <template #default="{row}">
+            <el-table :data="[row]" border>
+              <el-table-column :label="$t('members.table.headers.real-name')" prop="real_name" :formatter="formatColumnValue" />
+              <el-table-column :label="$t('members.table.headers.id-no')" prop="id_number_cccd" :formatter="formatColumnValue" />
+              <el-table-column :label="$t('members.table.headers.id-front')" prop="id_front_cccd">
+                <template #default="{row: subRow}">
+                  <el-image class="w-100px aspect-video" :src="subRow.id_front_cccd" />
+                </template>
+              </el-table-column>
+              <el-table-column :label="$t('members.table.headers.id-back')" prop="id_back_cccd">
+                <template #default="{row: subRow}">
+                  <el-image class="w-100px aspect-video" :src="subRow.id_back_cccd" />
+                </template>
+              </el-table-column>
+              <el-table-column :label="$t('members.table.headers.bank-name')" prop="bank_name" :formatter="formatColumnValue" />
+              <el-table-column :label="$t('members.table.headers.account-no')" prop="bank_number" :formatter="formatColumnValue" />
+              <el-table-column :label="$t('members.table.headers.holder')" prop="account_name" :formatter="formatColumnValue" />
+            </el-table>
+          </template>
+        </el-table-column>
 
-      <el-table-column min-width="50" prop="id" :label="$t('members.table.headers.id')" />
-      <el-table-column min-width="160" prop="agent_code" :label="$t('members.table.headers.agent-superior')">
-        <template #default="scope">
-          <div>{{ scope.row.agent_code || '-' }}</div>
-          <div>{{ scope.row.superior || '-' }}</div>
-        </template>
-      </el-table-column>
-      <el-table-column min-width="160" prop="username" :label="$t('members.table.headers.username-real-name')">
-        <template #default="scope">
-          <div>{{ scope.row.username || '-' }}</div>
-          <div>{{ scope.row.realname || '-' }}</div>
-        </template>
-      </el-table-column>
-      <el-table-column min-width="120" prop="phone" :label="$t('members.table.headers.phone')" :formatter="formatColumnValue" />
-      <el-table-column min-width="120" prop="balance" :label="$t('members.table.headers.balance')" :formatter="formatColumnValue" />
-      <el-table-column min-width="120" prop="balance_avail" :label="$t('members.table.headers.available')" :formatter="formatColumnValue" />
-      <el-table-column min-width="120" prop="balance_frozen" :label="$t('members.table.headers.freeze')" :formatter="formatColumnValue" />
-      <el-table-column min-width="120" prop="withdraw_avail" :label="$t('members.table.headers.withdrawable')" :formatter="formatColumnValue" />
-      <el-table-column min-width="120" prop="sell_amount_day" :label="$t('members.table.headers.today-income')" :formatter="formatColumnValue" />
-      <el-table-column min-width="120" prop="is_real" :label="$t('members.table.headers.is-real')">
-        <template #default="{row}">
-          {{ row.is_real ? 'Yes' : 'No' }}
-        </template>
-      </el-table-column>
-      <el-table-column min-width="150" prop="is_verified" :label="$t('members.table.headers.account-status')">
-        <template #default="{row}">
-          {{ row.is_verified ? 'Verified' : 'Pending' }}
-        </template>
-      </el-table-column>
-      <el-table-column min-width="120" prop="ipo_application" :label="$t('members.table.headers.can-ipo')">
-        <template #default="{row}">
-          {{ row.ipo_application ? 'Yes' : 'No' }}
-        </template>
-      </el-table-column>
-      <el-table-column min-width="150" prop="is_playing_board" :label="$t('members.table.headers.is-playing-board')">
-        <template #default="{row}">
-          {{ row.is_playing_board ? 'Yes' : 'No' }}
-        </template>
-      </el-table-column>
-      <el-table-column min-width="120" prop="last_login_ip" :label="$t('members.table.headers.last-login-ip')" :formatter="formatColumnValue" />
-      <el-table-column min-width="120" prop="created_by" :label="$t('members.table.headers.create-by')" :formatter="formatColumnValue" />
-      <el-table-column min-width="200" :label="$t('members.table.headers.actions')" fixed="right">
-        <template #default="{row}">
-          <el-dropdown>
-            <el-button type="primary">
-              {{ $t('members.buttons.edit.label') }}<el-icon class="el-icon--right">
-                <arrow-down />
-              </el-icon>
-            </el-button>
-            <template #dropdown>
-              <el-dropdown-menu>
-                <el-dropdown-item @click="startUpdateUser(row)">
-                  {{ $t('members.buttons.edit.label') }}
-                </el-dropdown-item>
-
-                <el-dropdown-item @click="startResetUserPassword(row)">
-                  {{ $t('members.buttons.reset-password.label') }}
-                </el-dropdown-item>
-
-                <el-dropdown-item @click="startResetUserWithdrawPassword(row)">
-                  {{ $t('members.buttons.reset-withdraw-password.label') }}
-                </el-dropdown-item>
-
-                <el-dropdown-item>
-                  {{ $t('members.buttons.modify-balance.label') }}
-                </el-dropdown-item>
-
-                <el-divider v-if="!row.is_freeze" class="!my-1" />
-
-                <el-dropdown-item v-if="!row.is_freeze" @click="startLockingUser(row)">
-                  {{ $t('members.buttons.lock-account.label') }}
-                </el-dropdown-item>
-              </el-dropdown-menu>
-            </template>
-          </el-dropdown>
-          <el-popconfirm
-            :width="300"
-            :confirm-button-text="$t('confirmation.yes-label')"
-            :cancel-button-text="$t('confirmation.no-label')"
-            :title="$t('members.table.button.delete.confirm')"
-            @confirm="deleteUser(row.id)"
-          >
-            <template #reference>
-              <el-button type="danger" class="ml-2">
-                {{ $t('members.buttons.delete.label') }}
+        <el-table-column min-width="50" prop="id" :label="$t('members.table.headers.id')" />
+        <el-table-column min-width="160" prop="agent_code" :label="$t('members.table.headers.agent-superior')">
+          <template #default="scope">
+            <div>{{ scope.row.agent_code || '-' }}</div>
+            <div>{{ scope.row.superior || '-' }}</div>
+          </template>
+        </el-table-column>
+        <el-table-column min-width="160" prop="username" :label="$t('members.table.headers.username-real-name')">
+          <template #default="scope">
+            <div>{{ scope.row.username || '-' }}</div>
+            <div>{{ scope.row.realname || '-' }}</div>
+          </template>
+        </el-table-column>
+        <el-table-column min-width="120" prop="phone" :label="$t('members.table.headers.phone')" :formatter="formatColumnValue" />
+        <el-table-column min-width="120" prop="balance" :label="$t('members.table.headers.balance')" :formatter="formatColumnValue" />
+        <el-table-column min-width="120" prop="balance_avail" :label="$t('members.table.headers.available')" :formatter="formatColumnValue" />
+        <el-table-column min-width="120" prop="balance_frozen" :label="$t('members.table.headers.freeze')" :formatter="formatColumnValue" />
+        <el-table-column min-width="120" prop="withdraw_avail" :label="$t('members.table.headers.withdrawable')" :formatter="formatColumnValue" />
+        <el-table-column min-width="120" prop="sell_amount_day" :label="$t('members.table.headers.today-income')" :formatter="formatColumnValue" />
+        <el-table-column min-width="120" prop="is_real" :label="$t('members.table.headers.is-real')">
+          <template #default="{row}">
+            {{ row.is_real ? 'Yes' : 'No' }}
+          </template>
+        </el-table-column>
+        <el-table-column min-width="150" prop="is_verified" :label="$t('members.table.headers.account-status')">
+          <template #default="{row}">
+            {{ row.is_verified ? 'Verified' : 'Pending' }}
+          </template>
+        </el-table-column>
+        <el-table-column min-width="120" prop="ipo_application" :label="$t('members.table.headers.can-ipo')">
+          <template #default="{row}">
+            {{ row.ipo_application ? 'Yes' : 'No' }}
+          </template>
+        </el-table-column>
+        <el-table-column min-width="150" prop="is_playing_board" :label="$t('members.table.headers.is-playing-board')">
+          <template #default="{row}">
+            {{ row.is_playing_board ? 'Yes' : 'No' }}
+          </template>
+        </el-table-column>
+        <el-table-column min-width="120" prop="last_login_ip" :label="$t('members.table.headers.last-login-ip')" :formatter="formatColumnValue" />
+        <el-table-column min-width="120" prop="created_by" :label="$t('members.table.headers.create-by')" :formatter="formatColumnValue" />
+        <el-table-column min-width="200" :label="$t('members.table.headers.actions')" fixed="right">
+          <template #default="{row}">
+            <el-dropdown>
+              <el-button type="primary">
+                {{ $t('members.buttons.edit.label') }}<el-icon class="el-icon--right">
+                  <arrow-down />
+                </el-icon>
               </el-button>
-            </template>
-          </el-popconfirm>
-        </template>
-      </el-table-column>
-    </app-table>
+              <template #dropdown>
+                <el-dropdown-menu>
+                  <el-dropdown-item @click="startUpdateUser(row)">
+                    {{ $t('members.buttons.edit.label') }}
+                  </el-dropdown-item>
+
+                  <el-dropdown-item @click="startResetUserPassword(row)">
+                    {{ $t('members.buttons.reset-password.label') }}
+                  </el-dropdown-item>
+
+                  <el-dropdown-item @click="startResetUserWithdrawPassword(row)">
+                    {{ $t('members.buttons.reset-withdraw-password.label') }}
+                  </el-dropdown-item>
+
+                  <el-dropdown-item>
+                    {{ $t('members.buttons.modify-balance.label') }}
+                  </el-dropdown-item>
+
+                  <el-divider class="!my-1" />
+
+                  <el-dropdown-item v-if="!row.is_freeze" @click="startLockingUser(row)">
+                    {{ $t('members.buttons.lock-account.label') }}
+                  </el-dropdown-item>
+
+                  <el-dropdown-item v-if="row.is_freeze" @click="startUnlockingUser(row)">
+                    {{ $t('members.buttons.unlock-account.label') }}
+                  </el-dropdown-item>
+                </el-dropdown-menu>
+              </template>
+            </el-dropdown>
+            <el-popconfirm
+              :width="300"
+              :confirm-button-text="$t('confirmation.yes-label')"
+              :cancel-button-text="$t('confirmation.no-label')"
+              :title="$t('members.table.button.delete.confirm')"
+              @confirm="deleteUser(row.id)"
+            >
+              <template #reference>
+                <el-button type="danger" class="ml-2">
+                  {{ $t('members.buttons.delete.label') }}
+                </el-button>
+              </template>
+            </el-popconfirm>
+          </template>
+        </el-table-column>
+      </app-table>
+    </el-card>
 
     <!-- Create user -->
     <create-user-dialog v-model="isCreateUserVisible" @reload="getAppUsers(currentPage)" />

@@ -15,8 +15,7 @@ const emit = defineEmits<Emits>()
 
 const { required, sameAs, alphaNum } = useValidators()
 const { createUserService } = useApiServices()
-const { $notify } = useNuxtApp()
-const { t } = useUtility()
+const { $notify, $t } = useNuxtApp()
 
 const form = reactive({
   username: '',
@@ -45,7 +44,7 @@ const createUser = async () => {
   })
 
   if (response?.status === 201) {
-    $notify.success(t('create-user.dialog.success', {
+    $notify.success($t('create-user.dialog.success', {
       username: form.username
     }))
 

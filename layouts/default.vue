@@ -1,9 +1,9 @@
 <script lang="ts" setup>
 const route = useRoute()
-const { t } = useUtility()
+const { $t } = useNuxtApp()
 const { isAuthenticated, logout } = useAuthentication()
 
-const pageTitle = computed(() => t(route.meta.pageTitle || 'home.page.title'))
+const pageTitle = computed(() => $t(route.meta.pageTitle || 'home.page.title'))
 
 useHead({
   title: pageTitle
@@ -15,7 +15,7 @@ useDark()
   <el-container class="h-screen">
     <el-header v-if="isAuthenticated" class="border-b border-[var(--el-border-color)] flex items-center">
       <h1 class="text-xl font-medium">
-        {{ t(route.meta.pageTitle || 'home.page.title') }}
+        {{ $t(route.meta.pageTitle || 'home.page.title') }}
       </h1>
       <div class="flex-grow" />
       <el-button type="danger" round plain @click="logout">

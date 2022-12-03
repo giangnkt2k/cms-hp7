@@ -17,8 +17,7 @@ const emit = defineEmits<Emits>()
 
 const { required, numeric, alphaNum } = useValidators()
 const { updateUserService } = useApiServices()
-const { $notify } = useNuxtApp()
-const { t } = useUtility()
+const { $notify, $t } = useNuxtApp()
 
 const form = reactive({
   realname: props.member?.real_name ?? '',
@@ -55,7 +54,7 @@ const updateUser = async () => {
     })
 
     if (response?.status === 200) {
-      $notify.success(t('update-user.dialog.success', {
+      $notify.success($t('update-user.dialog.success', {
         username: props.member.username
       }))
 
