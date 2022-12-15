@@ -28,7 +28,6 @@ declare module '@vue/runtime-core' {
 declare module '#app' {
   interface PageMeta {
     pageTitle?: string;
-    pageRouteName?: string;
   }
 }
 

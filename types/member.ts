@@ -40,8 +40,8 @@ export interface IMember {
 }
 
 export enum BalanceModifierType {
+    DECREASE,
     INCREASE,
-    DECREASE
 }
 
 export type ModifyUserBalanceBodyRequest = {

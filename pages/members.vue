@@ -2,12 +2,9 @@
 import { ArrowDown } from '@element-plus/icons-vue'
 import { TablePageSize } from '~~/types/app-table'
 import { IMember } from '~~/types/member'
-import { RouteNames } from '~~/types/routes'
 
 definePageMeta({
-  pageTitle: 'members.page.title',
-  pageRouteName: RouteNames.MEMBERS
-
+  pageTitle: 'members.page.title'
 })
 
 const { appUserListService, deleteUserService, updateUserService } = useApiServices()

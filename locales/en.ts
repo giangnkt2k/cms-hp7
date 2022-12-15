@@ -97,5 +97,7 @@ export default {
   'modify-user-balance.comments.label': 'Comments',
   'modify-user-balance.comments.note': 'Only admins/operators can see this',
   'modify-user-balance.remark.label': 'Remark',
-  'modify-user-balance.remark.note': 'Everyone can see this'
+  'modify-user-balance.remark.note': 'Everyone can see this',
+  'deposit.page.title': 'Deposit Manager',
+  'deposit.buttons.create.label': 'Create'
 }

@@ -1,11 +1,12 @@
 import { v4 } from 'uuid'
 import { INavigationItem } from '~~/types/layout'
+import { RouteNames } from '~~/types/routes'
 
 export const useNavigationItems = () => useState<INavigationItem[]>('navigation-items', () => [
   {
-    id: v4(),
+    id: v4().toString(),
     name: 'Dashboard',
-    routeName: 'dashboard',
+    routeName: RouteNames.DASHBOARD,
     route: '/'
   },
   {
@@ -16,7 +17,19 @@ export const useNavigationItems = () => useState<INavigationItem[]>('navigation-
         id: v4().toString(),
         name: 'Member List',
         route: '/members',
-        routeName: 'members'
+        routeName: RouteNames.MEMBERS
+      }
+    ]
+  },
+  {
+    id: v4().toString(),
+    name: 'Finance',
+    child: [
+      {
+        id: v4().toString(),
+        name: 'Deposit',
+        route: '/deposit',
+        routeName: RouteNames.DEPOSIT
       }
     ]
   }

@@ -29,12 +29,17 @@ export const useApiServices = () => {
     return api.post(`${ApiRoutes.MODIFY_USER_BALANCE}/${userId}`, data)
   }
 
+  const getDepositsService = () => {
+    return api.get(ApiRoutes.GET_DEPOSITS)
+  }
+
   return {
     loginService,
     appUserListService,
     createUserService,
     deleteUserService,
     updateUserService,
-    modifyUserBalanceService
+    modifyUserBalanceService,
+    getDepositsService
   }
 }
