@@ -1,6 +1,6 @@
 import { ApiRoutes, PaginatedResponse } from '~~/types/api'
 import { ILoginResponse } from '~~/types/authentication'
-import { IMember } from '~~/types/member'
+import { IMember, ModifyUserBalanceBodyRequest } from '~~/types/member'
 
 export const useApiServices = () => {
   const { $api: api } = useNuxtApp()
@@ -25,11 +25,16 @@ export const useApiServices = () => {
     return api.delete(`${ApiRoutes.DELETE_APP_USER}/${id}`)
   }
 
+  const modifyUserBalanceService = (userId: number, data: ModifyUserBalanceBodyRequest) => {
+    return api.post(`${ApiRoutes.MODIFY_USER_BALANCE}/${userId}`, data)
+  }
+
   return {
     loginService,
     appUserListService,
     createUserService,
     deleteUserService,
-    updateUserService
+    updateUserService,
+    modifyUserBalanceService
   }
 }

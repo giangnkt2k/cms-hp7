@@ -23,6 +23,7 @@ const selectedMember = ref<IMember>()
 const isLoading = ref(false)
 const isResetUserPasswordVisible = ref(false)
 const isResetUserWithdrawPasswordVisible = ref(false)
+const isModifyUserBalanceVisible = ref(false)
 
 const getAppUsers = async (page?: number) => {
   isLoading.value = true
@@ -42,7 +43,7 @@ const getAppUsers = async (page?: number) => {
 }
 
 const formatColumnValue = (_: unknown, __: unknown, value: unknown) => {
-  return value || '-'
+  return (value || '-') as string
 }
 
 const deleteUser = async (id: number) => {
@@ -77,6 +78,11 @@ const startLockingUser = (member: IMember) => {
       getAppUsers()
     }
   })
+}
+
+const startModifyUserBalance = (member: IMember) => {
+  selectedMember.value = member
+  isModifyUserBalanceVisible.value = true
 }
 
 const startUnlockingUser = (member: IMember) => {
@@ -195,7 +201,7 @@ getAppUsers()
                     {{ $t('members.buttons.reset-withdraw-password.label') }}
                   </el-dropdown-item>
 
-                  <el-dropdown-item>
+                  <el-dropdown-item @click="startModifyUserBalance(row)">
                     {{ $t('members.buttons.modify-balance.label') }}
                   </el-dropdown-item>
 
@@ -240,6 +246,9 @@ getAppUsers()
 
     <!-- Reset user withdraw password -->
     <reset-user-withdraw-password-dialog v-model="isResetUserWithdrawPasswordVisible" :member="selectedMember" />
+
+    <!-- Modify user balance -->
+    <modify-user-balance-dialog v-model="isModifyUserBalanceVisible" :member="selectedMember" @reload="getAppUsers(currentPage)" />
   </div>
 </template>
 

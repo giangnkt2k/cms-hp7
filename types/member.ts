@@ -38,3 +38,15 @@ export interface IMember {
     withdraw_password: string;
     __entity: string;
 }
+
+export enum BalanceModifierType {
+    INCREASE,
+    DECREASE
+}
+
+export type ModifyUserBalanceBodyRequest = {
+    amount: number,
+    type: BalanceModifierType,
+    comments: string,
+    remark: string
+}

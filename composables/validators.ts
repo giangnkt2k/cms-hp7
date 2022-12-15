@@ -5,7 +5,7 @@ export const useValidators = () => {
   const { createI18nMessage } = validators
 
   const messagePath = (data: { $validator: string; $propertyPath: string }) =>
-  `validation-messages.${data.$propertyPath}.${data.$validator}`
+  `validation-messages.${data.$validator}.${data.$propertyPath}`
 
   const withI18nMessage = createI18nMessage({ t: $t, messagePath })
 

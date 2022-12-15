@@ -5,11 +5,6 @@ export default {
   'login.form.username.label': 'Username',
   'login.form.password.label': 'Password',
   'login.form.submit.label': 'Login',
-  // Validation messages
-  'validation-messages.username.required': 'Please provide username',
-  'validation-messages.password.required': 'Please provide password',
-  'validation-messages.confirmPassword.sameAs': 'Password does not match',
-  'validation-messages.username.alphaNum': 'Invalid username. Please only use alphabet and numeric characters',
   // Header
   'header.logout-button.label': 'Logout',
   // Error messages
@@ -60,11 +55,28 @@ export default {
   'update-user.form.realname.label': 'Real Name',
   'update-user.form.bank-number.label': 'Account Number',
   'update-user.form.submit.label': 'Update',
-  'validation-messages.realname.required': 'Please provide user real name',
-  'validation-messages.phone.numeric': 'Invalid phone number',
-  'validation-messages.bankNumber.required': 'Please provide bank account number',
-  'validation-messages.bankNumber.alphaNum': 'Invalid bank account number',
-  'validation-messages.phone.required': 'Please provide phone number',
+  // Validation messages
+  'validation-messages': {
+    required: {
+      username: 'Please provide username',
+      password: 'Please provide password',
+      realname: 'Please provide user real name',
+      bankNumber: 'Please provide bank account number',
+      phone: 'Please provide phone number',
+      amount: 'Please provide amount to modify'
+    },
+    numeric: {
+      phone: 'Invalid phone number'
+    },
+    alphaNum: {
+      username: 'Invalid username. Please only use alphabet and numeric characters',
+      bankNumber: 'Invalid bank account number'
+    },
+    sameAs: {
+      confirmPassword: 'Password does not match'
+    }
+  },
+
   'members.buttons.reset-password.label': 'Reset password',
   'members.buttons.reset-withdraw-password.label': 'Reset withdraw password',
   'members.buttons.modify-balance.label': 'Modify balance',
@@ -73,5 +85,17 @@ export default {
   'members.lock-user.success': 'User has been locked',
   'members.buttons.unlock-account.label': 'Unlock',
   'members.unlock-user.confirm-message': 'Are you sure to unlock this user?',
-  'members.unlock-user.success': 'User has been unlocked'
+  'members.unlock-user.success': 'User has been unlocked',
+  'modify-user-balance.dialog.title': 'Modify balance',
+  'modify-user-balance.submit.label': 'Submit',
+  'modify-user-balance.amount.label': 'Amount',
+  'modify-user-balance.success': 'User balance has been modified',
+  'modify-user-balance.failed': 'Failed to modify user balance',
+  'modify-user-balance.type.label': 'Type',
+  'modify-user-balance.type.increase': 'Increase',
+  'modify-user-balance.type.decrease': 'Decrease',
+  'modify-user-balance.comments.label': 'Comments',
+  'modify-user-balance.comments.note': 'Only admins/operators can see this',
+  'modify-user-balance.remark.label': 'Remark',
+  'modify-user-balance.remark.note': 'Everyone can see this'
 }

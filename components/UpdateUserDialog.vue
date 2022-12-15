@@ -76,15 +76,15 @@ watch(() => props.member, (value) => {
 <template>
   <el-dialog :model-value="modelValue" destroy-on-close :title="$t('update-user.dialog.title')" @update:model-value="$emit('update:model-value', $event)">
     <el-form label-position="top" @submit.prevent="updateUser">
-      <el-form-item prop="realname" :label="$t('update-user.form.realname.label')" :error="$v.realname.$errors[0]?.$message" :show-message="$v.realname.$error">
+      <el-form-item prop="realname" :label="$t('update-user.form.realname.label')" :error="$v.realname.$errors[0]?.$message.toString()" :show-message="$v.realname.$error">
         <el-input v-model="form.realname" @blur="$v.realname.$touch" />
       </el-form-item>
 
-      <el-form-item prop="phone" :label="$t('update-user.form.phone.label')" :error="$v.phone.$errors[0]?.$message" :show-message="$v.phone.$error">
+      <el-form-item prop="phone" :label="$t('update-user.form.phone.label')" :error="$v.phone.$errors[0]?.$message.toString()" :show-message="$v.phone.$error">
         <el-input v-model="form.phone" @blur="$v.phone.$touch" />
       </el-form-item>
 
-      <el-form-item prop="bankNumber" :label="$t('update-user.form.bank-number.label')" :error="$v.bankNumber.$errors[0]?.$message" :show-message="$v.bankNumber.$error">
+      <el-form-item prop="bankNumber" :label="$t('update-user.form.bank-number.label')" :error="$v.bankNumber.$errors[0]?.$message.toString()" :show-message="$v.bankNumber.$error">
         <el-input v-model="form.bankNumber" @blur="$v.bankNumber.$touch" />
       </el-form-item>
 
