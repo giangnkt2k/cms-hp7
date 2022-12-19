@@ -33,7 +33,7 @@ const login = async () => {
   })
 
   if (response?.data) {
-    accessToken.value = response.data.token
+    accessToken.value = response.data.access_token
     await $typedRouter.push({ name: $routesList.index })
   }
   isLoggingIn.value = false

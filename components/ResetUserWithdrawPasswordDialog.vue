@@ -15,7 +15,7 @@ const props = defineProps<Props>()
 const emit = defineEmits<Emits>()
 
 const { required, sameAs } = useValidators()
-const { updateUserService } = useApiServices()
+const { resetUserWithdrawPasswordService } = useApiServices()
 const { $notify, $t } = useNuxtApp()
 
 const form = reactive({
@@ -37,7 +37,7 @@ const updatePassword = async () => {
   isUpdatingUser.value = true
 
   if (props.member) {
-    const response = await updateUserService(props.member.id, { withdraw_password: form.password }).catch(() => {
+    const response = await resetUserWithdrawPasswordService(props.member.id, form.password).catch(() => {
       //
     })
 

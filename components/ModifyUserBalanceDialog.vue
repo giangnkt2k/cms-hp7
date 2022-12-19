@@ -23,7 +23,7 @@ const form = reactive<ModifyUserBalanceBodyRequest>({
   amount: 0,
   type: BalanceModifierType.INCREASE,
   comments: '',
-  remark: ''
+  remarks: ''
 })
 const isUpdatingUser = ref(false)
 
@@ -46,7 +46,7 @@ const rules = computed(() => ({
     required
   },
   comments: {},
-  remark: {}
+  remarks: {}
 }))
 
 const modifyBalance = async () => {
@@ -95,8 +95,8 @@ const $v = useVuelidate(rules, form)
         <el-input v-model="form.comments" :placeholder="$t('modify-user-balance.comments.note')" @blur="$v.comments.$touch" />
       </el-form-item>
 
-      <el-form-item prop="remark" :label="$t('modify-user-balance.remark.label')" :error="$v.remark.$errors[0]?.$message.toString()" :show-message="$v.remark.$error">
-        <el-input v-model="form.remark" :placeholder="$t('modify-user-balance.remark.note')" @blur="$v.remark.$touch" />
+      <el-form-item prop="remark" :label="$t('modify-user-balance.remark.label')" :error="$v.remarks.$errors[0]?.$message.toString()" :show-message="$v.remarks.$error">
+        <el-input v-model="form.remarks" :placeholder="$t('modify-user-balance.remark.note')" @blur="$v.remarks.$touch" />
       </el-form-item>
 
       <el-form-item>

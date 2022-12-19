@@ -1,13 +1,13 @@
 <script lang="ts" setup>
 import { ArrowDown } from '@element-plus/icons-vue'
 import { TablePageSize } from '~~/types/app-table'
-import { IMember } from '~~/types/member'
+import { APP_USER_VERIFY_STATUS, IMember } from '~~/types/member'
 
 definePageMeta({
   pageTitle: 'members.page.title'
 })
 
-const { appUserListService, deleteUserService, updateUserService } = useApiServices()
+const { appUserListService, deleteUserService, freezeUserService, unfreezeUserService } = useApiServices()
 const { $notify, $message, $t } = useNuxtApp()
 
 const currentPage = ref(1)
@@ -27,7 +27,7 @@ const getAppUsers = async (page?: number) => {
   if (page) {
     currentPage.value = page
   }
-  const response = await appUserListService({ page: currentPage.value, limit: pageSize.value }).catch(() => {
+  const response = await appUserListService({ page: currentPage.value, pageSize: pageSize.value }).catch(() => {
     //
   })
 
@@ -68,7 +68,7 @@ const startResetUserWithdrawPassword = (member: IMember) => {
 
 const startLockingUser = (member: IMember) => {
   $message.confirm($t('members.lock-user.confirm-message')).then(async () => {
-    const response = await updateUserService(member.id, { is_freeze: true })
+    const response = await freezeUserService(member.id)
 
     if (response?.status === 200) {
       $notify.success($t('members.lock-user.success'))
@@ -84,7 +84,7 @@ const startModifyUserBalance = (member: IMember) => {
 
 const startUnlockingUser = (member: IMember) => {
   $message.confirm($t('members.unlock-user.confirm-message')).then(async () => {
-    const response = await updateUserService(member.id, { is_freeze: false })
+    const response = await unfreezeUserService(member.id)
 
     if (response?.status === 200) {
       $notify.success($t('members.unlock-user.success'))
@@ -117,56 +117,58 @@ getAppUsers()
           <template #default="{row}">
             <el-table :data="[row]" border>
               <el-table-column :label="$t('members.table.headers.real-name')" prop="real_name" :formatter="formatColumnValue" />
-              <el-table-column :label="$t('members.table.headers.id-no')" prop="id_number_cccd" :formatter="formatColumnValue" />
-              <el-table-column :label="$t('members.table.headers.id-front')" prop="id_front_cccd">
+              <el-table-column :label="$t('members.table.headers.id-no')" prop="id_number" :formatter="formatColumnValue" />
+              <el-table-column :label="$t('members.table.headers.id-front')" prop="id_front">
                 <template #default="{row: subRow}">
-                  <el-image class="w-100px aspect-video" :src="subRow.id_front_cccd" />
+                  <el-image class="w-100px aspect-video" :src="subRow.id_front" />
                 </template>
               </el-table-column>
-              <el-table-column :label="$t('members.table.headers.id-back')" prop="id_back_cccd">
+              <el-table-column :label="$t('members.table.headers.id-back')" prop="id_back">
                 <template #default="{row: subRow}">
-                  <el-image class="w-100px aspect-video" :src="subRow.id_back_cccd" />
+                  <el-image class="w-100px aspect-video" :src="subRow.id_back" />
                 </template>
               </el-table-column>
               <el-table-column :label="$t('members.table.headers.bank-name')" prop="bank_name" :formatter="formatColumnValue" />
               <el-table-column :label="$t('members.table.headers.account-no')" prop="bank_number" :formatter="formatColumnValue" />
-              <el-table-column :label="$t('members.table.headers.holder')" prop="account_name" :formatter="formatColumnValue" />
+              <el-table-column :label="$t('members.table.headers.holder')" prop="account_holder" :formatter="formatColumnValue" />
             </el-table>
           </template>
         </el-table-column>
 
         <el-table-column min-width="50" prop="id" :label="$t('members.table.headers.id')" />
-        <el-table-column min-width="160" prop="agent_code" :label="$t('members.table.headers.agent-superior')">
+        <el-table-column min-width="160" prop="created_by" :label="$t('members.table.headers.agent-superior')">
           <template #default="scope">
-            <div>{{ scope.row.agent_code || '-' }}</div>
-            <div>{{ scope.row.superior || '-' }}</div>
+            <div>{{ scope.row.created_by?.username || '-' }}</div>
+            <div>{{ scope.row.created_by?.agent?.name || '-' }}</div>
           </template>
         </el-table-column>
         <el-table-column min-width="160" prop="username" :label="$t('members.table.headers.username-real-name')">
           <template #default="scope">
             <div>{{ scope.row.username || '-' }}</div>
-            <div>{{ scope.row.realname || '-' }}</div>
+            <div>{{ scope.row.real_name || '-' }}</div>
           </template>
         </el-table-column>
         <el-table-column min-width="120" prop="phone" :label="$t('members.table.headers.phone')" :formatter="formatColumnValue" />
-        <el-table-column min-width="120" prop="balance" :label="$t('members.table.headers.balance')" :formatter="formatColumnValue" />
+        <el-table-column min-width="120" prop="balance" :label="$t('members.table.headers.balance')">
+          <template #default="scope">
+            <div>{{ scope.row.balance_avail + scope.row.balance_frozen || '-' }}</div>
+          </template>
+        </el-table-column>
         <el-table-column min-width="120" prop="balance_avail" :label="$t('members.table.headers.available')" :formatter="formatColumnValue" />
         <el-table-column min-width="120" prop="balance_frozen" :label="$t('members.table.headers.freeze')" :formatter="formatColumnValue" />
-        <el-table-column min-width="120" prop="withdraw_avail" :label="$t('members.table.headers.withdrawable')" :formatter="formatColumnValue" />
-        <el-table-column min-width="120" prop="sell_amount_day" :label="$t('members.table.headers.today-income')" :formatter="formatColumnValue" />
-        <el-table-column min-width="120" prop="is_real" :label="$t('members.table.headers.is-real')">
+        <el-table-column min-width="120" :label="$t('members.table.headers.is-real')">
           <template #default="{row}">
-            {{ row.is_real ? 'Yes' : 'No' }}
+            {{ row.verification_status === APP_USER_VERIFY_STATUS.VERIFIED ? 'Yes' : 'No' }}
           </template>
         </el-table-column>
-        <el-table-column min-width="150" prop="is_verified" :label="$t('members.table.headers.account-status')">
+        <el-table-column min-width="150" :label="$t('members.table.headers.account-status')">
           <template #default="{row}">
-            {{ row.is_verified ? 'Verified' : 'Pending' }}
+            {{ row.verification_status === APP_USER_VERIFY_STATUS.VERIFIED ? 'Verified' : 'Pending' }}
           </template>
         </el-table-column>
-        <el-table-column min-width="120" prop="ipo_application" :label="$t('members.table.headers.can-ipo')">
+        <el-table-column min-width="120" prop="can_ipo" :label="$t('members.table.headers.can-ipo')">
           <template #default="{row}">
-            {{ row.ipo_application ? 'Yes' : 'No' }}
+            {{ row.can_ipo ? 'Yes' : 'No' }}
           </template>
         </el-table-column>
         <el-table-column min-width="150" prop="is_playing_board" :label="$t('members.table.headers.is-playing-board')">
@@ -174,8 +176,7 @@ getAppUsers()
             {{ row.is_playing_board ? 'Yes' : 'No' }}
           </template>
         </el-table-column>
-        <el-table-column min-width="120" prop="last_login_ip" :label="$t('members.table.headers.last-login-ip')" :formatter="formatColumnValue" />
-        <el-table-column min-width="120" prop="created_by" :label="$t('members.table.headers.create-by')" :formatter="formatColumnValue" />
+        <el-table-column min-width="120" prop="created_by.username" :label="$t('members.table.headers.create-by')" :formatter="formatColumnValue" />
         <el-table-column min-width="200" :label="$t('members.table.headers.actions')" fixed="right">
           <template #default="{row}">
             <el-dropdown>
