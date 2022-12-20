@@ -9,6 +9,7 @@ definePageMeta({
 
 const { appUserListService, deleteUserService, freezeUserService, unfreezeUserService } = useApiServices()
 const { $notify, $message, $t } = useNuxtApp()
+const { getFileUrl } = useUtility()
 
 const currentPage = ref(1)
 const pageSize = ref<TablePageSize>(100)
@@ -120,12 +121,12 @@ getAppUsers()
               <el-table-column :label="$t('members.table.headers.id-no')" prop="id_number" :formatter="formatColumnValue" />
               <el-table-column :label="$t('members.table.headers.id-front')" prop="id_front">
                 <template #default="{row: subRow}">
-                  <el-image class="w-100px aspect-video" :src="subRow.id_front" />
+                  <el-image class="w-100px aspect-video" :src="getFileUrl(subRow.id_front.id)" />
                 </template>
               </el-table-column>
               <el-table-column :label="$t('members.table.headers.id-back')" prop="id_back">
                 <template #default="{row: subRow}">
-                  <el-image class="w-100px aspect-video" :src="subRow.id_back" />
+                  <el-image class="w-100px aspect-video" :src="getFileUrl(subRow.id_back.id)" />
                 </template>
               </el-table-column>
               <el-table-column :label="$t('members.table.headers.bank-name')" prop="bank_name" :formatter="formatColumnValue" />
@@ -177,6 +178,7 @@ getAppUsers()
           </template>
         </el-table-column>
         <el-table-column min-width="120" prop="created_by.username" :label="$t('members.table.headers.create-by')" :formatter="formatColumnValue" />
+        <el-table-column min-width="120" prop="approved_by.username" :label="$t('members.table.headers.approver')" :formatter="formatColumnValue" />
         <el-table-column min-width="200" :label="$t('members.table.headers.actions')" fixed="right">
           <template #default="{row}">
             <el-dropdown>

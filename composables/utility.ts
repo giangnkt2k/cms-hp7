@@ -1,8 +1,11 @@
 import numeral from 'numeral'
 import { ElNotification } from 'element-plus'
+import { buildUrl } from 'build-url-ts'
+import { ApiRoutes } from '~~/types/api'
 
 export const useUtility = () => {
   const { $dayjs } = useNuxtApp()
+  const config = useRuntimeConfig()
 
   const notify = ElNotification
 
@@ -18,9 +21,16 @@ export const useUtility = () => {
     return $dayjs(date).format(format)
   }
 
+  const getFileUrl = (id: number) => {
+    return buildUrl(config.public.API_ENDPOINT, {
+      path: `${ApiRoutes.READ_FILES}/${id}`
+    })
+  }
+
   return {
     showApiError,
     toMoneyFormat,
-    dateFormatter
+    dateFormatter,
+    getFileUrl
   }
 }

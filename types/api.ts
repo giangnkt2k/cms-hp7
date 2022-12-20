@@ -9,7 +9,8 @@ export enum ApiRoutes {
   RESET_APP_USER_WITHDRAW_PASSWORD = '/cms/members/:id/reset-withdraw-password',
   DELETE_APP_USER = '/cms/members',
   MODIFY_USER_BALANCE = '/cms/members/:id/modify-balance',
-  GET_DEPOSITS = '/cms/deposits'
+  GET_DEPOSITS = '/cms/deposits',
+  READ_FILES ='/app/files'
 }
 
 export type PaginatedResponse<DataType> = {
