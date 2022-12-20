@@ -3,6 +3,7 @@ import { TablePageSize } from '~~/types/app-table'
 import { ILoginResponse } from '~~/types/authentication'
 import { DEPOSIT_STATUS, IDeposit } from '~~/types/deposit'
 import { IMember, ModifyUserBalanceBodyRequest } from '~~/types/member'
+import { IWithdrawal, WITHDRAWAL_STATUS } from '~~/types/withdrawals'
 
 export const useApiServices = () => {
   const { $api: api } = useNuxtApp()
@@ -64,6 +65,19 @@ export const useApiServices = () => {
     return api.post<IDeposit>(ApiRoutes.CREATE_DEPOSIT, payload)
   }
 
+  const getWithdrawalsService = (page = 1, pageSize: TablePageSize = 100) => {
+    return api.get<PaginatedResponse<IWithdrawal[]>>(ApiRoutes.GET_WITHDRAWALS, {
+      params: {
+        page,
+        pageSize
+      }
+    })
+  }
+
+  const reviewWithdrawalService = (depositId: number, payload: { status: WITHDRAWAL_STATUS, remarks?: string, comments?: string}) => {
+    return api.post<IWithdrawal>(ApiRoutes.REVIEW_WITHDRAWAL.replace(':id', depositId.toString()), payload)
+  }
+
   return {
     loginService,
     appUserListService,
@@ -77,6 +91,8 @@ export const useApiServices = () => {
     resetUserPasswordService,
     resetUserWithdrawPasswordService,
     reviewDepositService,
-    createDepositService
+    createDepositService,
+    getWithdrawalsService,
+    reviewWithdrawalService
   }
 }

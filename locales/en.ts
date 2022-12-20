@@ -115,7 +115,8 @@ export default {
   'deposit.status.approved': 'Approved',
   'deposit.status.pending': 'Pending',
   'deposit.status.rejected': 'Rejected',
-  'members.table.actions.review': 'Review',
+  'deposit.table.headers.actions': 'Actions',
+  'deposit.table.actions.review': 'Review',
   'review-deposit.dialog.title': 'Review deposit',
   'review-deposit.form.username.label': 'Username',
   'review-deposit.form.realname.label': 'Real name',
@@ -138,5 +139,24 @@ export default {
   'create-deposit.amount.label': 'Amount',
   'create-deposit.submit.label': 'Submit',
   'create-deposit.success': 'Deposit has been created',
-  'create-deposit.failed': 'Failed to create deposit'
+  'create-deposit.failed': 'Failed to create deposit',
+
+  // Withdrawals
+  'withdrawals.page.title': 'Withdrawals',
+  'withdrawals.buttons.create.label': 'Create',
+  'withdrawals.table.headers.id': 'ID',
+  'withdrawals.table.headers.username-realname': 'Username/Name',
+  'withdrawals.table.headers.agent-superior': 'Agent/Superior',
+  'withdrawals.table.headers.amount': 'Amount',
+  'withdrawals.table.headers.reviewer': 'Reviewed By/Time',
+  'withdrawals.table.headers.created-at': 'Created At',
+  'withdrawals.table.headers.remarks': 'Remarks',
+  'withdrawals.table.headers.notes': 'Notes',
+  'withdrawals.table.headers.status': 'Status',
+  'withdrawals.status.approved': 'Approved',
+  'withdrawals.status.pending': 'Pending',
+  'withdrawals.status.rejected': 'Rejected',
+  'withdrawals.table.headers.actions': 'Actions',
+  'withdrawals.table.actions.review': 'Review',
+  'review-withdrawal.dialog.title': 'Review withdrawal'
 }

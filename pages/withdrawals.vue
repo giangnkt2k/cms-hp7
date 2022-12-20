@@ -1,26 +1,26 @@
 <script lang="ts" setup>
 import { TablePageSize } from '~~/types/app-table'
-import { DEPOSIT_STATUS, IDeposit } from '~~/types/deposit'
+import { DEPOSIT_STATUS } from '~~/types/deposit'
+import { IWithdrawal } from '~~/types/withdrawals'
 
 definePageMeta({
-  pageTitle: 'deposit.page.title'
+  pageTitle: 'withdrawals.page.title'
 })
 
-const { getDepositsService } = useApiServices()
+const { getWithdrawalsService } = useApiServices()
 const { dateFormatter } = useUtility()
-const { readableDepositStatus } = useDeposit()
+const { readableWithdrawalStatus } = useWithdrawal()
 
-const data = ref<IDeposit[]>([])
+const data = ref<IWithdrawal[]>([])
 const total = ref(0)
 const currentPage = ref(1)
 const pageSize = ref<TablePageSize>(100)
 const isLoading = ref(false)
-const isReviewDepositVisible = ref(false)
-const isCreateDepositVisible = ref(false)
-const selectedDeposit = ref<IDeposit>()
+const isReviewWithdrawalVisible = ref(false)
+const selectedWithdrawal = ref<IWithdrawal>()
 
-const getDeposits = async () => {
-  const response = await getDepositsService(currentPage.value, pageSize.value)
+const getWithdrawals = async () => {
+  const response = await getWithdrawalsService(currentPage.value, pageSize.value)
 
   if (response?.data) {
     data.value = response.data.data
@@ -28,25 +28,17 @@ const getDeposits = async () => {
   }
 }
 
-const startReviewDeposit = (data: IDeposit) => {
-  selectedDeposit.value = data
+const startReviewWithdrawal = (data: IWithdrawal) => {
+  selectedWithdrawal.value = data
 
-  isReviewDepositVisible.value = true
+  isReviewWithdrawalVisible.value = true
 }
 
-getDeposits()
+getWithdrawals()
 </script>
 
 <template>
   <div>
-    <div class="text-right">
-      <el-button
-        type="success"
-        @click="isCreateDepositVisible = true"
-      >
-        {{ $t('deposit.buttons.create.label') }}
-      </el-button>
-    </div>
     <el-card
       class="mt-4"
       body-style="padding: 0"
@@ -61,12 +53,12 @@ getDeposits()
         <el-table-column
           min-width="50"
           prop="id"
-          :label="$t('deposit.table.headers.id')"
+          :label="$t('withdrawals.table.headers.id')"
         />
         <el-table-column
           min-width="100"
           prop="app_user"
-          :label="$t('deposit.table.headers.username-realname')"
+          :label="$t('withdrawals.table.headers.username-realname')"
         >
           <template #default="{row}">
             <div>{{ row.app_user?.username || '-' }}</div>
@@ -77,7 +69,7 @@ getDeposits()
         <el-table-column
           min-width="100"
           prop="app_user.created_by"
-          :label="$t('deposit.table.headers.agent-superior')"
+          :label="$t('withdrawals.table.headers.agent-superior')"
         >
           <template #default="{row}">
             <div>{{ row.app_user?.created_by?.username || '-' }}</div>
@@ -87,12 +79,12 @@ getDeposits()
         <el-table-column
           min-width="100"
           prop="amount"
-          :label="$t('deposit.table.headers.amount')"
+          :label="$t('withdrawals.table.headers.amount')"
         />
         <el-table-column
           min-width="100"
           prop="approved_by"
-          :label="$t('deposit.table.headers.reviewer')"
+          :label="$t('withdrawals.table.headers.reviewer')"
         >
           <template #default="{row}">
             <div>{{ row.approved_by?.username || '-' }}</div>
@@ -102,7 +94,7 @@ getDeposits()
         <el-table-column
           min-width="100"
           prop="created_at"
-          :label="$t('deposit.table.headers.created-at')"
+          :label="$t('withdrawals.table.headers.created-at')"
         >
           <template #default="{row}">
             {{ dateFormatter(row.created_at, 'YYYY-MM-DD HH:mm:ss') || '-' }}
@@ -111,34 +103,34 @@ getDeposits()
         <el-table-column
           min-width="100"
           prop="remarks"
-          :label="$t('deposit.table.headers.remarks')"
+          :label="$t('withdrawals.table.headers.remarks')"
         />
         <el-table-column
           min-width="100"
           prop="comments"
-          :label="$t('deposit.table.headers.notes')"
+          :label="$t('withdrawals.table.headers.notes')"
         />
         <el-table-column
           min-width="100"
           prop="status"
-          :label="$t('deposit.table.headers.status')"
+          :label="$t('withdrawals.table.headers.status')"
         >
           <template #default="{row}">
-            {{ readableDepositStatus(row.status) }}
+            {{ readableWithdrawalStatus(row.status) }}
           </template>
         </el-table-column>
         <el-table-column
           min-width="100"
-          :label="$t('deposit.table.headers.actions')"
+          :label="$t('withdrawals.table.headers.actions')"
           fixed="right"
         >
           <template #default="{row}">
             <el-button
               v-if="row.status !== DEPOSIT_STATUS.APPROVED"
               type="primary"
-              @click="startReviewDeposit(row)"
+              @click="startReviewWithdrawal(row)"
             >
-              {{ $t('deposit.table.actions.review') }}
+              {{ $t('withdrawals.table.actions.review') }}
             </el-button>
           </template>
         </el-table-column>
@@ -146,21 +138,9 @@ getDeposits()
     </el-card>
 
     <AppDialog
-      v-model="isReviewDepositVisible"
-      :title="$t('review-deposit.dialog.title')"
-    >
-      <ReviewDepositForm
-        :deposit="selectedDeposit"
-        @reload="isReviewDepositVisible = false; getDeposits()"
-      />
-    </AppDialog>
-
-    <AppDialog
-      v-model="isCreateDepositVisible"
-      :title="$t('create-deposit.dialog.title')"
-    >
-      <CreateDepositForm @reload="isCreateDepositVisible = false; getDeposits()" />
-    </AppDialog>
+      v-model="isReviewWithdrawalVisible"
+      :title="$t('review-withdrawal.dialog.title')"
+    />
   </div>
 </template>
 
