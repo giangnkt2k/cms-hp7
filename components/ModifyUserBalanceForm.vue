@@ -76,6 +76,7 @@ const $v = useVuelidate(rules, form)
       :label="$t('modify-user-balance.type.label')"
       :error="$v.type.$errors[0]?.$message.toString()"
       :show-message="$v.type.$error"
+      required
     >
       <el-select v-model="form.type">
         <el-option
@@ -92,6 +93,7 @@ const $v = useVuelidate(rules, form)
       :label="$t('modify-user-balance.amount.label')"
       :error="$v.amount.$errors[0]?.$message.toString()"
       :show-message="$v.amount.$error"
+      required
     >
       <el-input-number
         v-model="form.amount"

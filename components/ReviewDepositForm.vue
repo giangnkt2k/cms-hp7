@@ -37,7 +37,9 @@ const $v = useVuelidate(rules, form)
 const reviewDeposit = async () => {
   isLoading.value = true
   if (props.deposit) {
-    const response = await reviewDepositService(props.deposit.id, form)
+    const response = await reviewDepositService(props.deposit.id, form).catch(() => {
+      $notify.success($t('review-deposit.failed'))
+    })
 
     if (response?.data) {
       emit('reload')

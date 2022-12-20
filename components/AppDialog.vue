@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 type Props = {
   modelValue: boolean
-  title: string
+  title?: string
 }
 
 type Emits = {

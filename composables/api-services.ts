@@ -11,7 +11,7 @@ export const useApiServices = () => {
     return api.post<ILoginResponse>(ApiRoutes.LOGIN, { username, password })
   }
 
-  const appUserListService = (data: { page: number, pageSize: number }) => {
+  const appUserListService = (data: { page: number, pageSize: number, keyword?: string }) => {
     return api.get<PaginatedResponse<IMember[]>>(ApiRoutes.APP_USER_LIST, { params: data })
   }
 
@@ -60,6 +60,10 @@ export const useApiServices = () => {
     return api.post<IDeposit>(ApiRoutes.REVIEW_DEPOSIT.replace(':id', depositId.toString()), payload)
   }
 
+  const createDepositService = (payload: {userId: number, amount: number}) => {
+    return api.post<IDeposit>(ApiRoutes.CREATE_DEPOSIT, payload)
+  }
+
   return {
     loginService,
     appUserListService,
@@ -72,6 +76,7 @@ export const useApiServices = () => {
     unfreezeUserService,
     resetUserPasswordService,
     resetUserWithdrawPasswordService,
-    reviewDepositService
+    reviewDepositService,
+    createDepositService
   }
 }

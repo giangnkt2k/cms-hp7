@@ -63,7 +63,8 @@ export default {
       realname: 'Please provide user real name',
       bankNumber: 'Please provide bank account number',
       phone: 'Please provide phone number',
-      amount: 'Please provide amount to modify'
+      amount: 'Please provide amount to modify',
+      selectedUserId: 'Please select user to create deposit'
     },
     numeric: {
       phone: 'Invalid phone number'
@@ -127,5 +128,15 @@ export default {
   'review-deposit.form.admin-notes.label': 'Admin notes',
   'review-deposit.form.remarks.label': 'Remarks',
   'review-deposit.form.submit.label': 'Submit',
-  'review-deposit.success': 'Deposit has been reviewed'
+  'review-deposit.success': 'Deposit has been reviewed',
+  'review-deposit.failed': 'Failed to review deposit',
+
+  // Create deposit
+  'create-deposit.dialog.title': 'Create deposit',
+  'create-deposit.user.label': 'Username/Real name',
+  'create-deposit.user.placeholder': 'Enter username or real name to select',
+  'create-deposit.amount.label': 'Amount',
+  'create-deposit.submit.label': 'Submit',
+  'create-deposit.success': 'Deposit has been created',
+  'create-deposit.failed': 'Failed to create deposit'
 }

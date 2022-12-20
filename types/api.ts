@@ -11,7 +11,8 @@ export enum ApiRoutes {
   MODIFY_USER_BALANCE = '/cms/members/:id/modify-balance',
   GET_DEPOSITS = '/cms/deposits',
   READ_FILES = '/app/files',
-  REVIEW_DEPOSIT = '/cms/deposits/:id/review'
+  REVIEW_DEPOSIT = '/cms/deposits/:id/review',
+  CREATE_DEPOSIT = '/cms/deposits'
 }
 
 export type PaginatedResponse<DataType> = {

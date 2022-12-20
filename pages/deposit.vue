@@ -16,6 +16,7 @@ const currentPage = ref(1)
 const pageSize = ref<TablePageSize>(100)
 const isLoading = ref(false)
 const isReviewDepositVisible = ref(false)
+const isCreateDepositVisible = ref(false)
 const selectedDeposit = ref<IDeposit>()
 
 const getDeposits = async () => {
@@ -39,7 +40,10 @@ getDeposits()
 <template>
   <div>
     <div class="text-right">
-      <el-button type="success">
+      <el-button
+        type="success"
+        @click="isCreateDepositVisible = true"
+      >
         {{ $t('deposit.buttons.create.label') }}
       </el-button>
     </div>
@@ -92,7 +96,7 @@ getDeposits()
         >
           <template #default="{row}">
             <div>{{ row.approved_by?.username || '-' }}</div>
-            <div>{{ dateFormatter(row.reviewed_at, 'YYYY-MM-DD HH:mm:ss') || '-' }}</div>
+            <div>{{ row.reviewed_at ? dateFormatter(row.reviewed_at, 'YYYY-MM-DD HH:mm:ss') : '-' }}</div>
           </template>
         </el-table-column>
         <el-table-column
@@ -149,6 +153,13 @@ getDeposits()
         :deposit="selectedDeposit"
         @reload="isReviewDepositVisible = false; getDeposits()"
       />
+    </AppDialog>
+
+    <AppDialog
+      v-model="isCreateDepositVisible"
+      :title="$t('create-deposit.dialog.title')"
+    >
+      <CreateDepositForm @reload="isCreateDepositVisible = false; getDeposits()" />
     </AppDialog>
   </div>
 </template>
