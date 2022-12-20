@@ -70,9 +70,22 @@ const $v = useVuelidate(rules, form)
 </script>
 
 <template>
-  <el-dialog :model-value="modelValue" destroy-on-close :title="$t('modify-user-balance.dialog.title')" @update:model-value="$emit('update:model-value', $event)">
-    <el-form label-position="top" @submit.prevent="modifyBalance">
-      <el-form-item prop="type" :label="$t('modify-user-balance.type.label')" :error="$v.type.$errors[0]?.$message.toString()" :show-message="$v.type.$error">
+  <el-dialog
+    :model-value="modelValue"
+    destroy-on-close
+    :title="$t('modify-user-balance.dialog.title')"
+    @update:model-value="$emit('update:model-value', $event)"
+  >
+    <el-form
+      label-position="top"
+      @submit.prevent="modifyBalance"
+    >
+      <el-form-item
+        prop="type"
+        :label="$t('modify-user-balance.type.label')"
+        :error="$v.type.$errors[0]?.$message.toString()"
+        :show-message="$v.type.$error"
+      >
         <el-select v-model="form.type">
           <el-option
             v-for="item in balanceModifierTypes"
@@ -83,7 +96,12 @@ const $v = useVuelidate(rules, form)
         </el-select>
       </el-form-item>
 
-      <el-form-item prop="amount" :label="$t('modify-user-balance.amount.label')" :error="$v.amount.$errors[0]?.$message.toString()" :show-message="$v.amount.$error">
+      <el-form-item
+        prop="amount"
+        :label="$t('modify-user-balance.amount.label')"
+        :error="$v.amount.$errors[0]?.$message.toString()"
+        :show-message="$v.amount.$error"
+      >
         <el-input-number
           v-model="form.amount"
           :min="0"
@@ -91,16 +109,40 @@ const $v = useVuelidate(rules, form)
         />
       </el-form-item>
 
-      <el-form-item prop="comments" :label="$t('modify-user-balance.comments.label')" :error="$v.comments.$errors[0]?.$message.toString()" :show-message="$v.comments.$error">
-        <el-input v-model="form.comments" :placeholder="$t('modify-user-balance.comments.note')" @blur="$v.comments.$touch" />
+      <el-form-item
+        prop="comments"
+        :label="$t('modify-user-balance.comments.label')"
+        :error="$v.comments.$errors[0]?.$message.toString()"
+        :show-message="$v.comments.$error"
+      >
+        <el-input
+          v-model="form.comments"
+          :placeholder="$t('modify-user-balance.comments.note')"
+          @blur="$v.comments.$touch"
+        />
       </el-form-item>
 
-      <el-form-item prop="remark" :label="$t('modify-user-balance.remark.label')" :error="$v.remarks.$errors[0]?.$message.toString()" :show-message="$v.remarks.$error">
-        <el-input v-model="form.remarks" :placeholder="$t('modify-user-balance.remark.note')" @blur="$v.remarks.$touch" />
+      <el-form-item
+        prop="remark"
+        :label="$t('modify-user-balance.remark.label')"
+        :error="$v.remarks.$errors[0]?.$message.toString()"
+        :show-message="$v.remarks.$error"
+      >
+        <el-input
+          v-model="form.remarks"
+          :placeholder="$t('modify-user-balance.remark.note')"
+          @blur="$v.remarks.$touch"
+        />
       </el-form-item>
 
       <el-form-item>
-        <el-button class="w-full" type="primary" :disabled="$v.$invalid" native-type="submit" :loading="isUpdatingUser">
+        <el-button
+          class="w-full"
+          type="primary"
+          :disabled="$v.$invalid"
+          native-type="submit"
+          :loading="isUpdatingUser"
+        >
           {{ $t('modify-user-balance.submit.label') }}
         </el-button>
       </el-form-item>

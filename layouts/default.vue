@@ -13,12 +13,20 @@ useDark()
 
 <template>
   <el-container class="h-screen">
-    <el-header v-if="isAuthenticated" class="border-b border-[var(--el-border-color)] flex items-center">
+    <el-header
+      v-if="isAuthenticated"
+      class="border-b border-[var(--el-border-color)] flex items-center"
+    >
       <h1 class="text-xl font-medium">
         {{ $t(route.meta.pageTitle || 'home.page.title') }}
       </h1>
       <div class="flex-grow" />
-      <el-button type="danger" round plain @click="logout">
+      <el-button
+        type="danger"
+        round
+        plain
+        @click="logout"
+      >
         {{ $t('header.logout-button.label') }}
       </el-button>
     </el-header>

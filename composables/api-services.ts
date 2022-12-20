@@ -1,6 +1,7 @@
 import { ApiRoutes, PaginatedResponse } from '~~/types/api'
 import { TablePageSize } from '~~/types/app-table'
 import { ILoginResponse } from '~~/types/authentication'
+import { IDeposit } from '~~/types/deposit'
 import { IMember, ModifyUserBalanceBodyRequest } from '~~/types/member'
 
 export const useApiServices = () => {
@@ -47,10 +48,10 @@ export const useApiServices = () => {
   }
 
   const getDepositsService = (page = 1, pageSize: TablePageSize = 100) => {
-    return api.get(ApiRoutes.GET_DEPOSITS, {
+    return api.get<PaginatedResponse<IDeposit[]>>(ApiRoutes.GET_DEPOSITS, {
       params: {
         page,
-        limit: pageSize
+        pageSize
       }
     })
   }

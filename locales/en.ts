@@ -12,7 +12,7 @@ export default {
   // Members
   'members.table.headers.id': 'ID',
   'members.table.headers.agent-superior': 'Agent/Superior',
-  'members.table.headers.username-real-name': 'Username/Real Name',
+  'members.table.headers.username-real-name': 'Username/Name',
   'members.table.headers.phone': 'Phone',
   'members.table.headers.balance': 'Balance',
   'members.table.headers.available': 'Available',
@@ -98,6 +98,21 @@ export default {
   'modify-user-balance.comments.note': 'Only admins/operators can see this',
   'modify-user-balance.remark.label': 'Remark',
   'modify-user-balance.remark.note': 'Everyone can see this',
+
+  // Deposit page
   'deposit.page.title': 'Deposit Manager',
-  'deposit.buttons.create.label': 'Create'
+  'deposit.buttons.create.label': 'Create',
+  'deposit.table.headers.id': 'ID',
+  'deposit.table.headers.username-realname': 'Username/Name',
+  'deposit.table.headers.agent-superior': 'Agent/Superior',
+  'deposit.table.headers.amount': 'Amount',
+  'deposit.table.headers.reviewer': 'Reviewed By/Time',
+  'deposit.table.headers.created-at': 'Created At',
+  'deposit.table.headers.remarks': 'Remarks',
+  'deposit.table.headers.notes': 'Notes',
+  'deposit.table.headers.status': 'Status',
+  'deposit.status.approved': 'Approved',
+  'deposit.status.pending': 'Pending',
+  'deposit.status.rejected': 'Rejected',
+  'members.table.actions.review': 'Review'
 }

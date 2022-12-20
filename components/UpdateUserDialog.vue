@@ -74,22 +74,60 @@ watch(() => props.member, (value) => {
 </script>
 
 <template>
-  <el-dialog :model-value="modelValue" destroy-on-close :title="$t('update-user.dialog.title')" @update:model-value="$emit('update:model-value', $event)">
-    <el-form label-position="top" @submit.prevent="updateUser">
-      <el-form-item prop="realname" :label="$t('update-user.form.realname.label')" :error="$v.realname.$errors[0]?.$message.toString()" :show-message="$v.realname.$error">
-        <el-input v-model="form.realname" @blur="$v.realname.$touch" />
+  <el-dialog
+    :model-value="modelValue"
+    destroy-on-close
+    :title="$t('update-user.dialog.title')"
+    @update:model-value="$emit('update:model-value', $event)"
+  >
+    <el-form
+      label-position="top"
+      @submit.prevent="updateUser"
+    >
+      <el-form-item
+        prop="realname"
+        :label="$t('update-user.form.realname.label')"
+        :error="$v.realname.$errors[0]?.$message.toString()"
+        :show-message="$v.realname.$error"
+      >
+        <el-input
+          v-model="form.realname"
+          @blur="$v.realname.$touch"
+        />
       </el-form-item>
 
-      <el-form-item prop="phone" :label="$t('update-user.form.phone.label')" :error="$v.phone.$errors[0]?.$message.toString()" :show-message="$v.phone.$error">
-        <el-input v-model="form.phone" @blur="$v.phone.$touch" />
+      <el-form-item
+        prop="phone"
+        :label="$t('update-user.form.phone.label')"
+        :error="$v.phone.$errors[0]?.$message.toString()"
+        :show-message="$v.phone.$error"
+      >
+        <el-input
+          v-model="form.phone"
+          @blur="$v.phone.$touch"
+        />
       </el-form-item>
 
-      <el-form-item prop="bankNumber" :label="$t('update-user.form.bank-number.label')" :error="$v.bankNumber.$errors[0]?.$message.toString()" :show-message="$v.bankNumber.$error">
-        <el-input v-model="form.bankNumber" @blur="$v.bankNumber.$touch" />
+      <el-form-item
+        prop="bankNumber"
+        :label="$t('update-user.form.bank-number.label')"
+        :error="$v.bankNumber.$errors[0]?.$message.toString()"
+        :show-message="$v.bankNumber.$error"
+      >
+        <el-input
+          v-model="form.bankNumber"
+          @blur="$v.bankNumber.$touch"
+        />
       </el-form-item>
 
       <el-form-item>
-        <el-button class="w-full" type="primary" :disabled="$v.$invalid" native-type="submit" :loading="isUpdatingUser">
+        <el-button
+          class="w-full"
+          type="primary"
+          :disabled="$v.$invalid"
+          native-type="submit"
+          :loading="isUpdatingUser"
+        >
           {{ $t('update-user.form.submit.label') }}
         </el-button>
       </el-form-item>

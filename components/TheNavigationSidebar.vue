@@ -7,8 +7,16 @@ const defaultActive = computed(() => route.name?.toString() || '')
 <template>
   <el-aside>
     <el-scrollbar>
-      <el-menu class="h-screen" router :default-active="defaultActive">
-        <NavigationBarSubItem v-for="(item, index) in navigationItems" :key="index" :item="item" />
+      <el-menu
+        class="h-screen"
+        router
+        :default-active="defaultActive"
+      >
+        <NavigationBarSubItem
+          v-for="(item, index) in navigationItems"
+          :key="index"
+          :item="item"
+        />
       </el-menu>
     </el-scrollbar>
   </el-aside>

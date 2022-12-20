@@ -20,7 +20,11 @@ defineEmits<Emits>()
 
 <template>
   <div class="w-full">
-    <el-table v-loading="isLoading" :data="data">
+    <el-table
+      v-loading="isLoading"
+      :data="data"
+      border
+    >
       <slot />
       <template #empty>
         <el-empty />
