@@ -1,5 +1,6 @@
 <script lang="ts" setup>
 import { ArrowDown } from '@element-plus/icons-vue'
+import { AppDialog } from '~~/.nuxt/components'
 import { TablePageSize } from '~~/types/app-table'
 import { APP_USER_VERIFY_STATUS, IMember } from '~~/types/member'
 
@@ -111,7 +112,7 @@ getAppUsers()
       class="mt-4"
       body-style="padding: 0"
     >
-      <app-table
+      <AppTable
         v-model:current-page="currentPage"
         v-model:page-size="pageSize"
         :data="members"
@@ -344,40 +345,62 @@ getAppUsers()
             </el-popconfirm>
           </template>
         </el-table-column>
-      </app-table>
+      </AppTable>
     </el-card>
 
     <!-- Create user -->
-    <create-user-dialog
+    <AppDialog
       v-model="isCreateUserVisible"
-      @reload="getAppUsers(currentPage)"
-    />
+      :title="$t('create-user.dialog.title')"
+    >
+      <CreateUserForm
+        @reload="isCreateUserVisible = false; getAppUsers(currentPage)"
+      />
+    </AppDialog>
 
     <!-- Update user -->
-    <update-user-dialog
+    <AppDialog
       v-model="isUpdateUserVisible"
-      :member="selectedMember"
-      @reload="getAppUsers(currentPage)"
-    />
+      :title="$t('update-user.dialog.title')"
+    >
+      <UpdateUserForm
+        :member="selectedMember"
+        @reload="isUpdateUserVisible = false; getAppUsers(currentPage)"
+      />
+    </AppDialog>
 
     <!-- Reset user password -->
-    <reset-user-password-dialog
+    <AppDialog
       v-model="isResetUserPasswordVisible"
-      :member="selectedMember"
-    />
+      :title="$t('update-user.dialog.title')"
+    >
+      <ResetUserPasswordForm
+        :member="selectedMember"
+        @reload="isResetUserPasswordVisible = false"
+      />
+    </AppDialog>
 
     <!-- Reset user withdraw password -->
-    <reset-user-withdraw-password-dialog
+    <AppDialog
       v-model="isResetUserWithdrawPasswordVisible"
-      :member="selectedMember"
-    />
+      :title="$t('update-user.dialog.title')"
+    >
+      <ResetUserWithdrawPasswordForm
+        :member="selectedMember"
+        @reload="isResetUserWithdrawPasswordVisible = false"
+      />
+    </AppDialog>
 
     <!-- Modify user balance -->
-    <modify-user-balance-dialog
+    <AppDialog
       v-model="isModifyUserBalanceVisible"
-      :member="selectedMember"
-      @reload="getAppUsers(currentPage)"
-    />
+      :title="$t('modify-user-balance.dialog.title')"
+    >
+      <ModifyUserBalanceForm
+        :member="selectedMember"
+        @reload="isModifyUserBalanceVisible = false; getAppUsers(currentPage)"
+      />
+    </AppDialog>
   </div>
 </template>
 

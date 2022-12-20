@@ -141,11 +141,15 @@ getDeposits()
       </AppTable>
     </el-card>
 
-    <ReviewDepositDialog
+    <AppDialog
       v-model="isReviewDepositVisible"
-      :deposit="selectedDeposit"
-      @reload="getDeposits"
-    />
+      :title="$t('review-deposit.dialog.title')"
+    >
+      <ReviewDepositForm
+        :deposit="selectedDeposit"
+        @reload="isReviewDepositVisible = false; getDeposits()"
+      />
+    </AppDialog>
   </div>
 </template>
 
