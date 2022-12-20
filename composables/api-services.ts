@@ -1,7 +1,7 @@
 import { ApiRoutes, PaginatedResponse } from '~~/types/api'
 import { TablePageSize } from '~~/types/app-table'
 import { ILoginResponse } from '~~/types/authentication'
-import { IDeposit } from '~~/types/deposit'
+import { DEPOSIT_STATUS, IDeposit } from '~~/types/deposit'
 import { IMember, ModifyUserBalanceBodyRequest } from '~~/types/member'
 
 export const useApiServices = () => {
@@ -56,6 +56,10 @@ export const useApiServices = () => {
     })
   }
 
+  const reviewDepositService = (depositId: number, payload: { status: DEPOSIT_STATUS, remarks?: string, comments?: string}) => {
+    return api.post<IDeposit>(ApiRoutes.REVIEW_DEPOSIT.replace(':id', depositId.toString()), payload)
+  }
+
   return {
     loginService,
     appUserListService,
@@ -67,6 +71,7 @@ export const useApiServices = () => {
     freezeUserService,
     unfreezeUserService,
     resetUserPasswordService,
-    resetUserWithdrawPasswordService
+    resetUserWithdrawPasswordService,
+    reviewDepositService
   }
 }

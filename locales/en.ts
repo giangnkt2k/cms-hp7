@@ -114,5 +114,18 @@ export default {
   'deposit.status.approved': 'Approved',
   'deposit.status.pending': 'Pending',
   'deposit.status.rejected': 'Rejected',
-  'members.table.actions.review': 'Review'
+  'members.table.actions.review': 'Review',
+  'review-deposit.dialog.title': 'Review deposit',
+  'review-deposit.form.username.label': 'Username',
+  'review-deposit.form.realname.label': 'Real name',
+  'review-deposit.form.amount.label': 'Amount',
+  'review-deposit.form.bank-name.label': 'Bank name',
+  'review-deposit.form.account-holder.label': 'Account holder',
+  'review-deposit.form.account-number.label': 'Account number',
+  'review-deposit.form.bank-branch.label': 'Branch',
+  'review-deposit.form.status.label': 'Status',
+  'review-deposit.form.admin-notes.label': 'Admin notes',
+  'review-deposit.form.remarks.label': 'Remarks',
+  'review-deposit.form.submit.label': 'Submit',
+  'review-deposit.success': 'Deposit has been reviewed'
 }

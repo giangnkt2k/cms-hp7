@@ -10,7 +10,8 @@ export enum ApiRoutes {
   DELETE_APP_USER = '/cms/members',
   MODIFY_USER_BALANCE = '/cms/members/:id/modify-balance',
   GET_DEPOSITS = '/cms/deposits',
-  READ_FILES ='/app/files'
+  READ_FILES = '/app/files',
+  REVIEW_DEPOSIT = '/cms/deposits/:id/review'
 }
 
 export type PaginatedResponse<DataType> = {

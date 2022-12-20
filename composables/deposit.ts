@@ -25,6 +25,10 @@ export const useDeposit = () => {
       value: DEPOSIT_STATUS.APPROVED
     },
     {
+      text: $t('deposit.status.pending'),
+      value: DEPOSIT_STATUS.PENDING
+    },
+    {
       text: $t('deposit.status.rejected'),
       value: DEPOSIT_STATUS.REJECTED
     }

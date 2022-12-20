@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import { TablePageSize } from '~~/types/app-table'
-import { IDeposit } from '~~/types/deposit'
+import { DEPOSIT_STATUS, IDeposit } from '~~/types/deposit'
 
 definePageMeta({
   pageTitle: 'deposit.page.title'
@@ -15,6 +15,8 @@ const total = ref(0)
 const currentPage = ref(1)
 const pageSize = ref<TablePageSize>(100)
 const isLoading = ref(false)
+const isReviewDepositVisible = ref(false)
+const selectedDeposit = ref<IDeposit>()
 
 const getDeposits = async () => {
   const response = await getDepositsService(currentPage.value, pageSize.value)
@@ -26,8 +28,9 @@ const getDeposits = async () => {
 }
 
 const startReviewDeposit = (data: IDeposit) => {
-  // TODO: Open review dialog
-  return data
+  selectedDeposit.value = data
+
+  isReviewDepositVisible.value = true
 }
 
 getDeposits()
@@ -127,6 +130,7 @@ getDeposits()
         >
           <template #default="{row}">
             <el-button
+              v-if="row.status !== DEPOSIT_STATUS.APPROVED"
               type="primary"
               @click="startReviewDeposit(row)"
             >
@@ -136,6 +140,12 @@ getDeposits()
         </el-table-column>
       </AppTable>
     </el-card>
+
+    <ReviewDepositDialog
+      v-model="isReviewDepositVisible"
+      :deposit="selectedDeposit"
+      @reload="getDeposits"
+    />
   </div>
 </template>
 
