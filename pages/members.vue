@@ -1,6 +1,5 @@
 <script lang="ts" setup>
 import { ArrowDown } from '@element-plus/icons-vue'
-import { AppDialog } from '~~/.nuxt/components'
 import { TablePageSize } from '~~/types/app-table'
 import { APP_USER_VERIFY_STATUS, IMember } from '~~/types/member'
 
