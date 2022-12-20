@@ -30,6 +30,12 @@ export const useNavigationItems = () => useState<INavigationItem[]>('navigation-
         name: 'Deposit',
         route: '/deposit',
         routeName: RouteNames.DEPOSIT
+      },
+      {
+        id: v4().toString(),
+        name: 'Withdrawal',
+        route: '/withdrawals',
+        routeName: RouteNames.WITHDRAWALS
       }
     ]
   }

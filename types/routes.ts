@@ -1,5 +1,6 @@
 export enum RouteNames {
     DASHBOARD = 'index',
     MEMBERS = 'members',
-    DEPOSIT = 'deposit'
+    DEPOSIT = 'deposit',
+    WITHDRAWALS = 'withdrawals'
 }
