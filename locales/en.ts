@@ -148,6 +148,9 @@ export default {
   'withdrawals.table.headers.username-realname': 'Username/Name',
   'withdrawals.table.headers.agent-superior': 'Agent/Superior',
   'withdrawals.table.headers.amount': 'Amount',
+  'withdrawals.table.headers.bank': 'Bank',
+  'withdrawals.table.headers.account-number': 'Account Number',
+  'withdrawals.table.headers.account-holder': 'Account Holder',
   'withdrawals.table.headers.reviewer': 'Reviewed By/Time',
   'withdrawals.table.headers.created-at': 'Created At',
   'withdrawals.table.headers.remarks': 'Remarks',
@@ -158,5 +161,14 @@ export default {
   'withdrawals.status.rejected': 'Rejected',
   'withdrawals.table.headers.actions': 'Actions',
   'withdrawals.table.actions.review': 'Review',
-  'review-withdrawal.dialog.title': 'Review withdrawal'
+  'review-withdrawal.dialog.title': 'Review withdrawal',
+  'review-withdrawal.form.username': 'Username',
+  'review-withdrawal.form.real-name': 'Real name',
+  'review-withdrawal.form.amount': 'Amount',
+  'review-withdrawal.form.status': 'Status',
+  'review-withdrawal.form.remarks': 'Remarks',
+  'review-withdrawal.form.comments': 'Comments',
+  'review-withdrawal.form.submit.label': 'Submit',
+  'review-withdrawal.success': 'Withdrawal has been reviewed',
+  'review-withdrawal.failed': 'Failed to review withdrawal'
 }

@@ -74,8 +74,8 @@ export const useApiServices = () => {
     })
   }
 
-  const reviewWithdrawalService = (depositId: number, payload: { status: WITHDRAWAL_STATUS, remarks?: string, comments?: string}) => {
-    return api.post<IWithdrawal>(ApiRoutes.REVIEW_WITHDRAWAL.replace(':id', depositId.toString()), payload)
+  const reviewWithdrawalService = (withdrawalId: number, payload: { status: WITHDRAWAL_STATUS, remarks?: string, comments?: string}) => {
+    return api.post<IWithdrawal>(ApiRoutes.REVIEW_WITHDRAWAL.replace(':id', withdrawalId.toString()), payload)
   }
 
   return {

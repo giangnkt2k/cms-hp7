@@ -38,7 +38,7 @@ const reviewDeposit = async () => {
   isLoading.value = true
   if (props.deposit) {
     const response = await reviewDepositService(props.deposit.id, form).catch(() => {
-      $notify.success($t('review-deposit.failed'))
+      $notify.error($t('review-deposit.failed'))
     })
 
     if (response?.data) {
@@ -158,7 +158,7 @@ form.comments = props.deposit?.comments || ''
       />
     </el-form-item>
 
-    <el-form-item>
+    <el-form-item label-width="0">
       <el-button
         class="w-full"
         type="primary"

@@ -83,6 +83,21 @@ getWithdrawals()
         />
         <el-table-column
           min-width="100"
+          prop="app_user.bank_name"
+          :label="$t('withdrawals.table.headers.bank')"
+        />
+        <el-table-column
+          min-width="100"
+          prop="app_user.bank_number"
+          :label="$t('withdrawals.table.headers.account-number')"
+        />
+        <el-table-column
+          min-width="100"
+          prop="app_user.account_holder"
+          :label="$t('withdrawals.table.headers.account-holder')"
+        />
+        <el-table-column
+          min-width="100"
           prop="approved_by"
           :label="$t('withdrawals.table.headers.reviewer')"
         >
@@ -140,7 +155,12 @@ getWithdrawals()
     <AppDialog
       v-model="isReviewWithdrawalVisible"
       :title="$t('review-withdrawal.dialog.title')"
-    />
+    >
+      <ReviewWithdrawalForm
+        :withdrawal="selectedWithdrawal"
+        @reload="isReviewWithdrawalVisible = false; getWithdrawals()"
+      />
+    </AppDialog>
   </div>
 </template>
 
