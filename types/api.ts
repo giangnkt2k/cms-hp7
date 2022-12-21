@@ -18,7 +18,8 @@ export enum ApiRoutes {
   GET_DEPOSIT_ACCOUNTS = '/cms/deposit-accounts',
   CREATE_DEPOSIT_ACCOUNTS = '/cms/deposit-accounts',
   UPDATE_DEPOSIT_ACCOUNTS = '/cms/deposit-accounts',
-  DELETE_DEPOSIT_ACCOUNTS = '/cms/deposit-accounts'
+  DELETE_DEPOSIT_ACCOUNTS = '/cms/deposit-accounts',
+  GET_TRANSACTIONS = '/cms/transactions'
 }
 
 export type PaginatedResponse<DataType> = {

@@ -1,9 +1,11 @@
+import { MaybeRef } from '@vueuse/shared'
 import { ApiRoutes, PaginatedResponse } from '~~/types/api'
 import { TablePageSize } from '~~/types/app-table'
 import { ILoginResponse } from '~~/types/authentication'
 import { DEPOSIT_STATUS, IDeposit } from '~~/types/deposit'
 import { CreateDepositAccountBody, IDepositAccount } from '~~/types/deposit-accounts'
 import { IMember, ModifyUserBalanceBodyRequest } from '~~/types/member'
+import { ITransaction } from '~~/types/transactions'
 import { IWithdrawal, WITHDRAWAL_STATUS } from '~~/types/withdrawals'
 
 export const useApiServices = () => {
@@ -100,6 +102,12 @@ export const useApiServices = () => {
     return api.delete(`${ApiRoutes.DELETE_DEPOSIT_ACCOUNTS}/${id}`)
   }
 
+  const transactionListService = ($page: MaybeRef<number> = 1, $pageSize: MaybeRef<TablePageSize> = 20) => {
+    const page = unref($page)
+    const pageSize = unref($pageSize)
+    return api.get<PaginatedResponse<ITransaction[]>>(ApiRoutes.GET_TRANSACTIONS, { params: { page, pageSize } })
+  }
+
   return {
     loginService,
     appUserListService,
@@ -119,6 +127,7 @@ export const useApiServices = () => {
     depositAccountListService,
     createDepositAccountService,
     updateDepositAccountService,
-    deleteDepositAccountService
+    deleteDepositAccountService,
+    transactionListService
   }
 }

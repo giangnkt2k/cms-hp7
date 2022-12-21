@@ -19,12 +19,15 @@ const isReviewWithdrawalVisible = ref(false)
 const selectedWithdrawal = ref<IWithdrawal>()
 
 const getWithdrawals = async () => {
+  isLoading.value = true
   const response = await getWithdrawalsService(currentPage.value, pageSize.value)
 
   if (response?.data) {
     data.value = response.data.data
     total.value = response.data.count
   }
+
+  isLoading.value = false
 }
 
 const startReviewWithdrawal = (data: IWithdrawal) => {

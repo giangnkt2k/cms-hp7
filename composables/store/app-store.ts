@@ -42,6 +42,12 @@ export const useNavigationItems = () => useState<INavigationItem[]>('navigation-
         name: 'Deposit Accounts',
         route: '/deposit-accounts',
         routeName: RouteNames.DEPOSIT_ACCOUNTS
+      },
+      {
+        id: v4().toString(),
+        name: 'Transactions',
+        route: '/transactions',
+        routeName: RouteNames.TRANSACTIONS
       }
     ]
   }

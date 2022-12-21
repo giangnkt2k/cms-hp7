@@ -203,5 +203,21 @@ export default {
   // Update deposit account
   'update-deposit-accounts.success': 'Deposit account has been updated',
   'update-deposit-accounts.failed': 'Failed to update deposit account',
-  'update-deposit-accounts.dialog.title': 'Update deposit account'
+  'update-deposit-accounts.dialog.title': 'Update deposit account',
+
+  // Transactions
+  'transactions.table.headers.id': 'ID',
+  'transactions.table.headers.username-realname': 'Username/Real name',
+  'transactions.table.headers.agent': 'Agent/Superior',
+  'transactions.table.headers.type': 'Type',
+  'transactions.type.withdrawal': 'Withdrawal',
+  'transactions.type.deposit': 'Deposit',
+  'transactions.type.sell': 'Sell stock',
+  'transactions.type.buy': 'Buy stock',
+  'transactions.table.headers.amount': 'Amount',
+  'transactions.table.headers.before': 'Before change',
+  'transactions.table.headers.after': 'After change',
+  'transactions.table.headers.created-at': 'Created at',
+  'transactions.table.headers.comments': 'Comments',
+  'transactions.table.headers.remarks': 'Remarks'
 }
