@@ -32,7 +32,7 @@ const rules = computed(() => ({
   }
 }))
 
-const $v = useVuelidate(rules, form)
+const v$ = useVuelidate(rules, form)
 
 const reviewDeposit = async () => {
   isLoading.value = true
@@ -126,12 +126,12 @@ form.comments = props.deposit?.comments || ''
 
     <el-form-item
       :label="$t('review-deposit.form.status.label')"
-      :error="$v.status.$errors[0]?.$message.toString()"
-      :show-message="$v.status.$error"
+      :error="v$.status.$errors[0]?.$message.toString()"
+      :show-message="v$.status.$error"
     >
       <el-select
         v-model="form.status"
-        @blur="$v.status.$touch"
+        @blur="v$.status.$touch"
       >
         <el-option
           v-for="(option, index) in depositStatuses"
@@ -162,7 +162,7 @@ form.comments = props.deposit?.comments || ''
       <el-button
         class="w-full"
         type="primary"
-        :disabled="$v.$invalid"
+        :disabled="v$.$invalid"
         native-type="submit"
         :loading="isLoading"
       >

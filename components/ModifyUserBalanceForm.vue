@@ -63,7 +63,7 @@ const modifyBalance = async () => {
   }
 }
 
-const $v = useVuelidate(rules, form)
+const v$ = useVuelidate(rules, form)
 </script>
 
 <template>
@@ -74,8 +74,8 @@ const $v = useVuelidate(rules, form)
     <el-form-item
       prop="type"
       :label="$t('modify-user-balance.type.label')"
-      :error="$v.type.$errors[0]?.$message.toString()"
-      :show-message="$v.type.$error"
+      :error="v$.type.$errors[0]?.$message.toString()"
+      :show-message="v$.type.$error"
       required
     >
       <el-select v-model="form.type">
@@ -91,40 +91,40 @@ const $v = useVuelidate(rules, form)
     <el-form-item
       prop="amount"
       :label="$t('modify-user-balance.amount.label')"
-      :error="$v.amount.$errors[0]?.$message.toString()"
-      :show-message="$v.amount.$error"
+      :error="v$.amount.$errors[0]?.$message.toString()"
+      :show-message="v$.amount.$error"
       required
     >
       <el-input-number
         v-model="form.amount"
         :min="0"
-        @blur="$v.amount.$touch"
+        @blur="v$.amount.$touch"
       />
     </el-form-item>
 
     <el-form-item
       prop="comments"
       :label="$t('modify-user-balance.comments.label')"
-      :error="$v.comments.$errors[0]?.$message.toString()"
-      :show-message="$v.comments.$error"
+      :error="v$.comments.$errors[0]?.$message.toString()"
+      :show-message="v$.comments.$error"
     >
       <el-input
         v-model="form.comments"
         :placeholder="$t('modify-user-balance.comments.note')"
-        @blur="$v.comments.$touch"
+        @blur="v$.comments.$touch"
       />
     </el-form-item>
 
     <el-form-item
       prop="remark"
       :label="$t('modify-user-balance.remark.label')"
-      :error="$v.remarks.$errors[0]?.$message.toString()"
-      :show-message="$v.remarks.$error"
+      :error="v$.remarks.$errors[0]?.$message.toString()"
+      :show-message="v$.remarks.$error"
     >
       <el-input
         v-model="form.remarks"
         :placeholder="$t('modify-user-balance.remark.note')"
-        @blur="$v.remarks.$touch"
+        @blur="v$.remarks.$touch"
       />
     </el-form-item>
 
@@ -132,7 +132,7 @@ const $v = useVuelidate(rules, form)
       <el-button
         class="w-full"
         type="primary"
-        :disabled="$v.$invalid"
+        :disabled="v$.$invalid"
         native-type="submit"
         :loading="isUpdatingUser"
       >

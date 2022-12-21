@@ -2,6 +2,7 @@ import { ApiRoutes, PaginatedResponse } from '~~/types/api'
 import { TablePageSize } from '~~/types/app-table'
 import { ILoginResponse } from '~~/types/authentication'
 import { DEPOSIT_STATUS, IDeposit } from '~~/types/deposit'
+import { CreateDepositAccountBody, IDepositAccount } from '~~/types/deposit-accounts'
 import { IMember, ModifyUserBalanceBodyRequest } from '~~/types/member'
 import { IWithdrawal, WITHDRAWAL_STATUS } from '~~/types/withdrawals'
 
@@ -78,6 +79,27 @@ export const useApiServices = () => {
     return api.post<IWithdrawal>(ApiRoutes.REVIEW_WITHDRAWAL.replace(':id', withdrawalId.toString()), payload)
   }
 
+  const depositAccountListService = (page = 1, pageSize: TablePageSize = 100) => {
+    return api.get<PaginatedResponse<IDepositAccount[]>>(ApiRoutes.GET_DEPOSIT_ACCOUNTS, {
+      params: {
+        page,
+        pageSize
+      }
+    })
+  }
+
+  const createDepositAccountService = (payload: CreateDepositAccountBody) => {
+    return api.post<IDepositAccount>(ApiRoutes.CREATE_DEPOSIT_ACCOUNTS, payload)
+  }
+
+  const updateDepositAccountService = (id: number, payload: Partial<CreateDepositAccountBody>) => {
+    return api.put(`${ApiRoutes.UPDATE_DEPOSIT_ACCOUNTS}/${id}`, payload)
+  }
+
+  const deleteDepositAccountService = (id: number) => {
+    return api.delete(`${ApiRoutes.DELETE_DEPOSIT_ACCOUNTS}/${id}`)
+  }
+
   return {
     loginService,
     appUserListService,
@@ -93,6 +115,10 @@ export const useApiServices = () => {
     reviewDepositService,
     createDepositService,
     getWithdrawalsService,
-    reviewWithdrawalService
+    reviewWithdrawalService,
+    depositAccountListService,
+    createDepositAccountService,
+    updateDepositAccountService,
+    deleteDepositAccountService
   }
 }

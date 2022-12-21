@@ -64,7 +64,11 @@ export default {
       bankNumber: 'Please provide bank account number',
       phone: 'Please provide phone number',
       amount: 'Please provide amount to modify',
-      selectedUserId: 'Please select user to create deposit'
+      selectedUserId: 'Please select user to create deposit',
+      bank_name: 'Please enter the bank name',
+      branch: 'Please enter the bank branch',
+      account_number: 'Please enter the account number',
+      account_holder: 'Please enter the account holder'
     },
     numeric: {
       phone: 'Invalid phone number'
@@ -170,5 +174,34 @@ export default {
   'review-withdrawal.form.comments': 'Comments',
   'review-withdrawal.form.submit.label': 'Submit',
   'review-withdrawal.success': 'Withdrawal has been reviewed',
-  'review-withdrawal.failed': 'Failed to review withdrawal'
+  'review-withdrawal.failed': 'Failed to review withdrawal',
+
+  // Deposit Account
+  'deposit-accounts.page.title': 'Deposit Accounts',
+  'deposit-accounts.buttons.create.label': 'Create',
+  'deposit-accounts.table.headers.id': 'ID',
+  'deposit-accounts.table.headers.bank': 'Bank',
+  'deposit-accounts.table.headers.account-number': 'Account Number',
+  'deposit-accounts.table.headers.account-holder': 'Account Holder',
+  'deposit-accounts.table.headers.branch': 'Branch',
+  'deposit-accounts.table.headers.created-at': 'Created At',
+  'deposit-accounts.table.headers.is_enabled': 'Is Enabled?',
+  'deposit-accounts.table.headers.is_public': 'Is Public?',
+  'deposit-accounts.table.headers.actions': 'Actions',
+  'deposit-accounts.table.headers.actions.edit': 'Edit',
+  'deposit-accounts.table.headers.actions.delete': 'Delete',
+
+  // Create Deposit Account
+  'create-deposit-accounts.dialog.title': 'Create Deposit Account',
+  'create-deposit-accounts.submit.label': 'Submit',
+  'create-deposit-accounts.success': 'Deposit account has been created',
+  'create-deposit-accounts.failed': 'Failed to create deposit account',
+  'deposit-accounts.table.headers.actions.delete.confirm': 'Are you sure to delete this deposit account?',
+  'deposit-accounts.table.headers.actions.delete.success': 'Deposit account has been deleted',
+  'deposit-accounts.table.headers.actions.delete.failed': 'Failed to delete deposit account',
+
+  // Update deposit account
+  'update-deposit-accounts.success': 'Deposit account has been updated',
+  'update-deposit-accounts.failed': 'Failed to update deposit account',
+  'update-deposit-accounts.dialog.title': 'Update deposit account'
 }

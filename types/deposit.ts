@@ -1,19 +1,8 @@
+import { IDepositAccount } from './deposit-accounts'
 import { IMember } from './member'
 
 export interface ApprovedBy {
     username: string;
-}
-
-export interface DepositAccount {
-    created_at: string;
-    updated_at: string;
-    id: number;
-    bank_name: string;
-    account_number: string;
-    branch: string;
-    account_holder: string;
-    is_public: boolean;
-    is_enabled: boolean;
 }
 
 export enum DEPOSIT_STATUS {
@@ -32,6 +21,6 @@ export interface IDeposit {
     comments: null | string;
     remarks: null | string;
     approved_by: ApprovedBy | null;
-    deposit_account: DepositAccount | null;
+    deposit_account: IDepositAccount | null;
     app_user: IMember;
 }

@@ -35,7 +35,7 @@ const rules = computed(() => ({
   }
 }))
 
-const $v = useVuelidate(rules, form)
+const v$ = useVuelidate(rules, form)
 
 const searchUser = async (keyword: string) => {
   if (keyword) {
@@ -75,8 +75,8 @@ const createDeposit = async () => {
     <el-form-item
       prop="selectedUserId"
       :label="$t('create-deposit.user.label')"
-      :error="$v.selectedUserId.$errors[0]?.$message.toString()"
-      :show-message="$v.selectedUserId.$error"
+      :error="v$.selectedUserId.$errors[0]?.$message.toString()"
+      :show-message="v$.selectedUserId.$error"
     >
       <el-select
         v-model="form.selectedUserId"
@@ -86,7 +86,7 @@ const createDeposit = async () => {
         :placeholder="$t('create-deposit.user.placeholder')"
         :remote-method="searchUser"
         :loading="isLoading"
-        @blur="$v.selectedUserId.$touch"
+        @blur="v$.selectedUserId.$touch"
       >
         <el-option
           v-for="user in users"
@@ -99,12 +99,12 @@ const createDeposit = async () => {
     <el-form-item
       prop="amount"
       :label="$t('create-deposit.amount.label')"
-      :error="$v.amount.$errors[0]?.$message.toString()"
-      :show-message="$v.amount.$error"
+      :error="v$.amount.$errors[0]?.$message.toString()"
+      :show-message="v$.amount.$error"
     >
       <el-input-number
         v-model.number="form.amount"
-        @blur="$v.amount.$touch"
+        @blur="v$.amount.$touch"
       />
     </el-form-item>
 
@@ -112,7 +112,7 @@ const createDeposit = async () => {
       <el-button
         class="w-full"
         type="primary"
-        :disabled="$v.$invalid"
+        :disabled="v$.$invalid"
         native-type="submit"
         :loading="isCreatingDeposit"
       >

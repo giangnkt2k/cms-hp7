@@ -1,7 +1,6 @@
 <script lang="ts" setup>
 import { TablePageSize } from '~~/types/app-table'
-import { DEPOSIT_STATUS } from '~~/types/deposit'
-import { IWithdrawal } from '~~/types/withdrawals'
+import { IWithdrawal, WITHDRAWAL_STATUS } from '~~/types/withdrawals'
 
 definePageMeta({
   pageTitle: 'withdrawals.page.title'
@@ -141,7 +140,7 @@ getWithdrawals()
         >
           <template #default="{row}">
             <el-button
-              v-if="row.status !== DEPOSIT_STATUS.APPROVED"
+              v-if="row.status !== WITHDRAWAL_STATUS.APPROVED"
               type="primary"
               @click="startReviewWithdrawal(row)"
             >

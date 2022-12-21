@@ -52,7 +52,7 @@ const updatePassword = async () => {
   isUpdatingUser.value = false
 }
 
-const $v = useVuelidate(rules, form)
+const v$ = useVuelidate(rules, form)
 </script>
 
 <template>
@@ -63,26 +63,26 @@ const $v = useVuelidate(rules, form)
     <el-form-item
       prop="password"
       :label="$t('create-user.form.password.label')"
-      :error="$v.password.$errors[0]?.$message.toString()"
-      :show-message="$v.password.$error"
+      :error="v$.password.$errors[0]?.$message.toString()"
+      :show-message="v$.password.$error"
     >
       <el-input
         v-model="form.password"
         show-password
-        @blur="$v.password.$touch"
+        @blur="v$.password.$touch"
       />
     </el-form-item>
 
     <el-form-item
       prop="confirmPassword"
       :label="$t('create-user.form.confirm-password.label')"
-      :error="$v.confirmPassword.$errors[0]?.$message.toString()"
-      :show-message="$v.confirmPassword.$error"
+      :error="v$.confirmPassword.$errors[0]?.$message.toString()"
+      :show-message="v$.confirmPassword.$error"
     >
       <el-input
         v-model="form.confirmPassword"
         show-password
-        @blur="$v.confirmPassword.$touch"
+        @blur="v$.confirmPassword.$touch"
       />
     </el-form-item>
 
@@ -90,7 +90,7 @@ const $v = useVuelidate(rules, form)
       <el-button
         class="w-full"
         type="primary"
-        :disabled="$v.$invalid"
+        :disabled="v$.$invalid"
         native-type="submit"
         :loading="isUpdatingUser"
       >

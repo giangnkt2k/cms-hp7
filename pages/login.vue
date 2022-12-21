@@ -39,7 +39,7 @@ const login = async () => {
   isLoggingIn.value = false
 }
 
-const $v = useVuelidate(rules, form)
+const v$ = useVuelidate(rules, form)
 </script>
 
 <template>
@@ -52,25 +52,25 @@ const $v = useVuelidate(rules, form)
         <el-form-item
           prop="username"
           :label="$t('login.form.username.label')"
-          :error="$v.username.$errors[0]?.$message"
-          :show-message="$v.username.$error"
+          :error="v$.username.$errors[0]?.$message"
+          :show-message="v$.username.$error"
         >
           <el-input
             v-model="form.username"
-            @blur="$v.username.$touch"
+            @blur="v$.username.$touch"
           />
         </el-form-item>
 
         <el-form-item
           prop="password"
           :label="$t('login.form.password.label')"
-          :error="$v.password.$errors[0]?.$message"
-          :show-message="$v.password.$error"
+          :error="v$.password.$errors[0]?.$message"
+          :show-message="v$.password.$error"
         >
           <el-input
             v-model="form.password"
             show-password
-            @blur="$v.password.$touch"
+            @blur="v$.password.$touch"
           />
         </el-form-item>
 
@@ -78,7 +78,7 @@ const $v = useVuelidate(rules, form)
           <el-button
             class="w-full"
             type="primary"
-            :disabled="$v.$invalid"
+            :disabled="v$.$invalid"
             native-type="submit"
             :loading="isLoggingIn"
           >

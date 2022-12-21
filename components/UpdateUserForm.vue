@@ -63,7 +63,7 @@ const updateUser = async () => {
   isUpdatingUser.value = false
 }
 
-const $v = useVuelidate(rules, form)
+const v$ = useVuelidate(rules, form)
 
 setMemberInfo(props.member)
 </script>
@@ -76,36 +76,36 @@ setMemberInfo(props.member)
     <el-form-item
       prop="realname"
       :label="$t('update-user.form.realname.label')"
-      :error="$v.realname.$errors[0]?.$message.toString()"
-      :show-message="$v.realname.$error"
+      :error="v$.realname.$errors[0]?.$message.toString()"
+      :show-message="v$.realname.$error"
     >
       <el-input
         v-model="form.realname"
-        @blur="$v.realname.$touch"
+        @blur="v$.realname.$touch"
       />
     </el-form-item>
 
     <el-form-item
       prop="phone"
       :label="$t('update-user.form.phone.label')"
-      :error="$v.phone.$errors[0]?.$message.toString()"
-      :show-message="$v.phone.$error"
+      :error="v$.phone.$errors[0]?.$message.toString()"
+      :show-message="v$.phone.$error"
     >
       <el-input
         v-model="form.phone"
-        @blur="$v.phone.$touch"
+        @blur="v$.phone.$touch"
       />
     </el-form-item>
 
     <el-form-item
       prop="bankNumber"
       :label="$t('update-user.form.bank-number.label')"
-      :error="$v.bankNumber.$errors[0]?.$message.toString()"
-      :show-message="$v.bankNumber.$error"
+      :error="v$.bankNumber.$errors[0]?.$message.toString()"
+      :show-message="v$.bankNumber.$error"
     >
       <el-input
         v-model="form.bankNumber"
-        @blur="$v.bankNumber.$touch"
+        @blur="v$.bankNumber.$touch"
       />
     </el-form-item>
 
@@ -113,7 +113,7 @@ setMemberInfo(props.member)
       <el-button
         class="w-full"
         type="primary"
-        :disabled="$v.$invalid"
+        :disabled="v$.$invalid"
         native-type="submit"
         :loading="isUpdatingUser"
       >

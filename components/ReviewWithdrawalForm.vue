@@ -32,7 +32,7 @@ const rules = computed(() => ({
   }
 }))
 
-const $v = useVuelidate(rules, form)
+const v$ = useVuelidate(rules, form)
 
 const reviewWithdrawal = async () => {
   isLoading.value = true
@@ -83,12 +83,12 @@ const reviewWithdrawal = async () => {
 
     <el-form-item
       :label="$t('review-withdrawal.form.status')"
-      :error="$v.status.$errors[0]?.$message.toString()"
-      :show-message="$v.status.$error"
+      :error="v$.status.$errors[0]?.$message.toString()"
+      :show-message="v$.status.$error"
     >
       <el-select
         v-model="form.status"
-        @blur="$v.status.$touch"
+        @blur="v$.status.$touch"
       >
         <el-option
           v-for="(item, index) in withdrawalStatuses"
@@ -115,7 +115,7 @@ const reviewWithdrawal = async () => {
       <el-button
         class="w-full"
         type="primary"
-        :disabled="$v.$invalid"
+        :disabled="v$.$invalid"
         native-type="submit"
         :loading="isLoading"
       >

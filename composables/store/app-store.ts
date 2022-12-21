@@ -15,7 +15,7 @@ export const useNavigationItems = () => useState<INavigationItem[]>('navigation-
     child: [
       {
         id: v4().toString(),
-        name: 'Member List',
+        name: 'Members',
         route: '/members',
         routeName: RouteNames.MEMBERS
       }
@@ -27,15 +27,21 @@ export const useNavigationItems = () => useState<INavigationItem[]>('navigation-
     child: [
       {
         id: v4().toString(),
-        name: 'Deposit',
-        route: '/deposit',
-        routeName: RouteNames.DEPOSIT
+        name: 'Deposits',
+        route: '/deposits',
+        routeName: RouteNames.DEPOSITS
       },
       {
         id: v4().toString(),
-        name: 'Withdrawal',
+        name: 'Withdrawals',
         route: '/withdrawals',
         routeName: RouteNames.WITHDRAWALS
+      },
+      {
+        id: v4().toString(),
+        name: 'Deposit Accounts',
+        route: '/deposit-accounts',
+        routeName: RouteNames.DEPOSIT_ACCOUNTS
       }
     ]
   }
