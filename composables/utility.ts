@@ -22,7 +22,7 @@ export const useUtility = () => {
   }
 
   const getFileUrl = (id: number) => {
-    return buildUrl(config.public.API_ENDPOINT, {
+    return buildUrl(config.public.LINK_IMG, {
       path: `${ApiRoutes.READ_FILES}/${id}`
     })
   }

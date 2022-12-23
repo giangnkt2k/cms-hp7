@@ -146,7 +146,7 @@ getAppUsers()
                 <template #default="{row: subRow}">
                   <el-image
                     class="w-100px aspect-video"
-                    :src="getFileUrl(subRow.id_front.id)"
+                    :src="getFileUrl(subRow.id_front)"
                   />
                 </template>
               </el-table-column>
@@ -157,7 +157,7 @@ getAppUsers()
                 <template #default="{row: subRow}">
                   <el-image
                     class="w-100px aspect-video"
-                    :src="getFileUrl(subRow.id_back.id)"
+                    :src="getFileUrl(subRow.id_back)"
                   />
                 </template>
               </el-table-column>

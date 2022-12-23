@@ -22,7 +22,7 @@ const isLoading = ref(false)
 
 const form = reactive({
   status: props.deposit?.status || DEPOSIT_STATUS.PENDING,
-  remarks: props.deposit?.remarks || '',
+  remark: props.deposit?.remark || '',
   comments: props.deposit?.comments || ''
 })
 
@@ -51,7 +51,7 @@ const reviewDeposit = async () => {
 }
 
 form.status = props.deposit?.status || DEPOSIT_STATUS.PENDING
-form.remarks = props.deposit?.remarks || ''
+form.remark = props.deposit?.remark || ''
 form.comments = props.deposit?.comments || ''
 </script>
 
@@ -154,7 +154,7 @@ form.comments = props.deposit?.comments || ''
       :label="$t('review-deposit.form.remarks.label')"
     >
       <el-input
-        v-model="form.remarks"
+        v-model="form.remark"
       />
     </el-form-item>
 

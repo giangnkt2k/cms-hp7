@@ -119,8 +119,8 @@ getWithdrawals()
         </el-table-column>
         <el-table-column
           min-width="100"
-          prop="remarks"
-          :label="$t('withdrawals.table.headers.remarks')"
+          prop="remark"
+          :label="$t('withdrawals.table.headers.remark')"
         />
         <el-table-column
           min-width="100"

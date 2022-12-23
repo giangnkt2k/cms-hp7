@@ -113,7 +113,7 @@ export default {
   'deposit.table.headers.amount': 'Amount',
   'deposit.table.headers.reviewer': 'Reviewed By/Time',
   'deposit.table.headers.created-at': 'Created At',
-  'deposit.table.headers.remarks': 'Remarks',
+  'deposit.table.headers.remark': 'Remark',
   'deposit.table.headers.notes': 'Notes',
   'deposit.table.headers.status': 'Status',
   'deposit.status.approved': 'Approved',
@@ -131,7 +131,7 @@ export default {
   'review-deposit.form.bank-branch.label': 'Branch',
   'review-deposit.form.status.label': 'Status',
   'review-deposit.form.admin-notes.label': 'Admin notes',
-  'review-deposit.form.remarks.label': 'Remarks',
+  'review-deposit.form.remark.label': 'remark',
   'review-deposit.form.submit.label': 'Submit',
   'review-deposit.success': 'Deposit has been reviewed',
   'review-deposit.failed': 'Failed to review deposit',
@@ -157,7 +157,7 @@ export default {
   'withdrawals.table.headers.account-holder': 'Account Holder',
   'withdrawals.table.headers.reviewer': 'Reviewed By/Time',
   'withdrawals.table.headers.created-at': 'Created At',
-  'withdrawals.table.headers.remarks': 'Remarks',
+  'withdrawals.table.headers.remark': 'remark',
   'withdrawals.table.headers.notes': 'Notes',
   'withdrawals.table.headers.status': 'Status',
   'withdrawals.status.approved': 'Approved',
@@ -170,7 +170,7 @@ export default {
   'review-withdrawal.form.real-name': 'Real name',
   'review-withdrawal.form.amount': 'Amount',
   'review-withdrawal.form.status': 'Status',
-  'review-withdrawal.form.remarks': 'Remarks',
+  'review-withdrawal.form.remark': 'remark',
   'review-withdrawal.form.comments': 'Comments',
   'review-withdrawal.form.submit.label': 'Submit',
   'review-withdrawal.success': 'Withdrawal has been reviewed',
@@ -219,5 +219,5 @@ export default {
   'transactions.table.headers.after': 'After change',
   'transactions.table.headers.created-at': 'Created at',
   'transactions.table.headers.comments': 'Comments',
-  'transactions.table.headers.remarks': 'Remarks'
+  'transactions.table.headers.remark': 'remark'
 }

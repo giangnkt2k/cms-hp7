@@ -3,7 +3,7 @@ import { TablePageSize } from '~~/types/app-table'
 import { ITransaction } from '~~/types/transactions'
 
 const { transactionListService } = useApiServices()
-const { readableTransactionType, getComments, getRemarks } = useTransaction()
+const { readableTransactionType, getComments, getremark } = useTransaction()
 const { dateFormatter } = useUtility()
 
 const data = ref<ITransaction[]>([])
@@ -112,10 +112,10 @@ getTransactionList()
         <el-table-column
           min-width="100"
           prop="created_at"
-          :label="$t('transactions.table.headers.remarks')"
+          :label="$t('transactions.table.headers.remark')"
         >
           <template #default="{row}">
-            {{ getRemarks(row) || '-' }}
+            {{ getremark(row) || '-' }}
           </template>
         </el-table-column>
 

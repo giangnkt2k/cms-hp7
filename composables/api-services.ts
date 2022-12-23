@@ -24,7 +24,7 @@ export const useApiServices = () => {
   }
 
   const updateUserService = (id: number, data: Partial<IMember>) => {
-    return api.put(`${ApiRoutes.UPDATE_APP_USER}/${id}`, data)
+    return api.patch(`${ApiRoutes.UPDATE_APP_USER}/${id}`, data)
   }
 
   const freezeUserService = (id: number) => {
@@ -44,11 +44,11 @@ export const useApiServices = () => {
   }
 
   const deleteUserService = (id: number) => {
-    return api.delete(`${ApiRoutes.DELETE_APP_USER}/${id}`)
+    return api.patch(`${ApiRoutes.DELETE_APP_USER}/${id}`)
   }
 
   const modifyUserBalanceService = (userId: number, data: ModifyUserBalanceBodyRequest) => {
-    return api.patch(ApiRoutes.MODIFY_USER_BALANCE.replace(':id', `${userId}`), data)
+    return api.post(ApiRoutes.MODIFY_USER_BALANCE.replace(':id', `${userId}`), data)
   }
 
   const getDepositsService = (page = 1, pageSize: TablePageSize = 100) => {
@@ -60,11 +60,11 @@ export const useApiServices = () => {
     })
   }
 
-  const reviewDepositService = (depositId: number, payload: { status: DEPOSIT_STATUS, remarks?: string, comments?: string}) => {
+  const reviewDepositService = (depositId: number, payload: { status: DEPOSIT_STATUS, remark?: string, comments?: string}) => {
     return api.post<IDeposit>(ApiRoutes.REVIEW_DEPOSIT.replace(':id', depositId.toString()), payload)
   }
 
-  const createDepositService = (payload: {userId: number, amount: number}) => {
+  const createDepositService = (payload: {user_id: number, amount: number}) => {
     return api.post<IDeposit>(ApiRoutes.CREATE_DEPOSIT, payload)
   }
 
@@ -77,7 +77,7 @@ export const useApiServices = () => {
     })
   }
 
-  const reviewWithdrawalService = (withdrawalId: number, payload: { status: WITHDRAWAL_STATUS, remarks?: string, comments?: string}) => {
+  const reviewWithdrawalService = (withdrawalId: number, payload: { status: WITHDRAWAL_STATUS, remark?: string, comments?: string}) => {
     return api.post<IWithdrawal>(ApiRoutes.REVIEW_WITHDRAWAL.replace(':id', withdrawalId.toString()), payload)
   }
 

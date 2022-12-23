@@ -19,7 +19,7 @@ export interface IDeposit {
     amount: number;
     status: DEPOSIT_STATUS;
     comments: null | string;
-    remarks: null | string;
+    remark: null | string;
     approved_by: ApprovedBy | null;
     deposit_account: IDepositAccount | null;
     app_user: IMember;

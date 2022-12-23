@@ -53,7 +53,7 @@ const createDeposit = async () => {
   if (form.selectedUserId) {
     isCreatingDeposit.value = true
 
-    const response = await createDepositService({ userId: form.selectedUserId, amount: form.amount }).catch(() => {
+    const response = await createDepositService({ user_id: form.selectedUserId, amount: form.amount }).catch(() => {
       $notify.success($t('create-deposit.failed'))
     })
 

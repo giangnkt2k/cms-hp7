@@ -18,9 +18,9 @@ export interface IWithdrawal {
     id: number;
     amount: number;
     status: WITHDRAWAL_STATUS;
-    comments: null;
-    remarks: null;
-    reviewed_at: null;
+    comments?: string;
+    remark?: string;
+    reviewed_at?: Date;
     app_user: IMember;
     approved_by: CreatedBy;
 }

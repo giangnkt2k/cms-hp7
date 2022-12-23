@@ -48,7 +48,7 @@ export type ModifyUserBalanceBodyRequest = {
     amount: number,
     type: BalanceModifierType,
     comments: string,
-    remarks: string
+    remark: string
 }
 
 export enum APP_USER_VERIFY_STATUS {

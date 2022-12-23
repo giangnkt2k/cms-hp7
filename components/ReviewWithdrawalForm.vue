@@ -22,7 +22,7 @@ const isLoading = ref(false)
 
 const form = reactive({
   status: props.withdrawal?.status ?? WITHDRAWAL_STATUS.PENDING,
-  remarks: props.withdrawal?.remarks ?? '',
+  remark: props.withdrawal?.remark ?? '',
   comments: props.withdrawal?.comments ?? ''
 })
 
@@ -105,9 +105,9 @@ const reviewWithdrawal = async () => {
       />
     </el-form-item>
 
-    <el-form-item :label="$t('review-withdrawal.form.remarks')">
+    <el-form-item :label="$t('review-withdrawal.form.remark')">
       <el-input
-        v-model="form.remarks"
+        v-model="form.remark"
       />
     </el-form-item>
 

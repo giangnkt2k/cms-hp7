@@ -22,13 +22,13 @@ export const useTransaction = () => {
     }
   }
 
-  const getRemarks = (transaction: ITransaction) => {
+  const getremark = (transaction: ITransaction) => {
     switch (transaction.type) {
       case TRANSACTION_TYPES.DEPOSIT:
-        return transaction.deposit?.remarks
+        return transaction.deposit?.remark
 
       case TRANSACTION_TYPES.WITHDRAW:
-        return transaction.withdrawal?.remarks
+        return transaction.withdrawal?.remark
 
       case TRANSACTION_TYPES.BUY:
         return transaction.position?.stock.N
@@ -61,7 +61,7 @@ export const useTransaction = () => {
   }
   return {
     readableTransactionType,
-    getRemarks,
+    getremark,
     getComments
   }
 }
