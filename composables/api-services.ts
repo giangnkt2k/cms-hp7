@@ -5,7 +5,7 @@ import { ILoginResponse } from '~~/types/authentication'
 import { DEPOSIT_STATUS, IDeposit } from '~~/types/deposit'
 import { CreateDepositAccountBody, IDepositAccount } from '~~/types/deposit-accounts'
 import { IMember, ModifyUserBalanceBodyRequest } from '~~/types/member'
-import { ITransaction } from '~~/types/transactions'
+import { IOrder, ITransaction } from '~~/types/transactions'
 import { IWithdrawal, WITHDRAWAL_STATUS } from '~~/types/withdrawals'
 
 export const useApiServices = () => {
@@ -95,7 +95,7 @@ export const useApiServices = () => {
   }
 
   const updateDepositAccountService = (id: number, payload: Partial<CreateDepositAccountBody>) => {
-    return api.put(`${ApiRoutes.UPDATE_DEPOSIT_ACCOUNTS}/${id}`, payload)
+    return api.patch(`${ApiRoutes.UPDATE_DEPOSIT_ACCOUNTS}/${id}`, payload)
   }
 
   const deleteDepositAccountService = (id: number) => {
@@ -106,6 +106,12 @@ export const useApiServices = () => {
     const page = unref($page)
     const pageSize = unref($pageSize)
     return api.get<PaginatedResponse<ITransaction[]>>(ApiRoutes.GET_TRANSACTIONS, { params: { page, pageSize } })
+  }
+
+  const orderListService = ($page: MaybeRef<number> = 1, $pageSize: MaybeRef<TablePageSize> = 20) => {
+    const page = unref($page)
+    const pageSize = unref($pageSize)
+    return api.get<PaginatedResponse<IOrder[]>>(ApiRoutes.GET_ORDER, { params: { page, pageSize } })
   }
 
   return {
@@ -128,6 +134,7 @@ export const useApiServices = () => {
     createDepositAccountService,
     updateDepositAccountService,
     deleteDepositAccountService,
-    transactionListService
+    transactionListService,
+    orderListService
   }
 }

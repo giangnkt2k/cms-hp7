@@ -14,12 +14,13 @@ export enum ApiRoutes {
   REVIEW_DEPOSIT = '/deposit/review/:id',
   CREATE_DEPOSIT = '/deposit/create',
   GET_WITHDRAWALS = '/withdrawal/list',
-  REVIEW_WITHDRAWAL = '/cms/withdrawals/:id/review',
-  GET_DEPOSIT_ACCOUNTS = '/cms/deposit-accounts',
-  CREATE_DEPOSIT_ACCOUNTS = '/cms/deposit-accounts',
-  UPDATE_DEPOSIT_ACCOUNTS = '/cms/deposit-accounts',
+  REVIEW_WITHDRAWAL = '/withdrawal/review/:id',
+  GET_DEPOSIT_ACCOUNTS = '/deposit-account/list',
+  CREATE_DEPOSIT_ACCOUNTS = '/deposit-account/create',
+  UPDATE_DEPOSIT_ACCOUNTS = '/deposit-account/update',
   DELETE_DEPOSIT_ACCOUNTS = '/cms/deposit-accounts',
-  GET_TRANSACTIONS = '/cms/transactions'
+  GET_TRANSACTIONS = '/transaction/list',
+  GET_ORDER = '/order/list/histories'
 }
 
 export type PaginatedResponse<DataType> = {

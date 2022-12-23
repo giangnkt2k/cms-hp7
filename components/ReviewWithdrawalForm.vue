@@ -62,14 +62,14 @@ const reviewWithdrawal = async () => {
   >
     <el-form-item :label="$t('review-withdrawal.form.username')">
       <el-input
-        :model-value="withdrawal.app_user.username"
+        :model-value="withdrawal.username"
         readonly
       />
     </el-form-item>
 
     <el-form-item :label="$t('review-withdrawal.form.real-name')">
       <el-input
-        :model-value="withdrawal.app_user.real_name"
+        :model-value="withdrawal.real_name"
         readonly
       />
     </el-form-item>

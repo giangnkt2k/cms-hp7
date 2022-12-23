@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import { ArrowDown } from '@element-plus/icons-vue'
 import { TablePageSize } from '~~/types/app-table'
-import { APP_USER_VERIFY_STATUS, IMember } from '~~/types/member'
+import { IMember } from '~~/types/member'
 
 definePageMeta({
   pageTitle: 'members.page.title'
@@ -10,6 +10,7 @@ definePageMeta({
 const { appUserListService, deleteUserService, freezeUserService, unfreezeUserService } = useApiServices()
 const { $notify, $message, $t } = useNuxtApp()
 const { getFileUrl } = useUtility()
+const { updateUserService } = useApiServices()
 
 const currentPage = ref(1)
 const pageSize = ref<TablePageSize>(100)
@@ -84,11 +85,23 @@ const startModifyUserBalance = (member: IMember) => {
 }
 
 const startUnlockingUser = (member: IMember) => {
-  $message.confirm($t('members.unlock-user.confirm-message')).then(async () => {
+  $message.confirm($t('members.lock-user.confirm-message')).then(async () => {
     const response = await unfreezeUserService(member.id)
 
     if (response?.status === 200) {
       $notify.success($t('members.unlock-user.success'))
+      getAppUsers()
+    }
+  })
+}
+
+const verifiedUser = (member: IMember) => {
+  $message.confirm($t('members.verified-user.confirm-message')).then(async () => {
+    const response = await updateUserService(member.id, { is_verified: true }).catch(() => {
+      //
+    })
+    if (response?.status === 200) {
+      $notify.success($t('update-user.dialog.success'))
       getAppUsers()
     }
   })
@@ -237,7 +250,7 @@ getAppUsers()
           :label="$t('members.table.headers.is-real')"
         >
           <template #default="{row}">
-            {{ row.verification_status === APP_USER_VERIFY_STATUS.VERIFIED ? 'Yes' : 'No' }}
+            {{ row.is_verified ? 'Yes' : 'No' }}
           </template>
         </el-table-column>
         <el-table-column
@@ -245,7 +258,7 @@ getAppUsers()
           :label="$t('members.table.headers.account-status')"
         >
           <template #default="{row}">
-            {{ row.verification_status === APP_USER_VERIFY_STATUS.VERIFIED ? 'Verified' : 'Pending' }}
+            {{ row.is_verified ? 'Verified' : 'Pending' }}
           </template>
         </el-table-column>
         <el-table-column
@@ -306,6 +319,10 @@ getAppUsers()
 
                   <el-dropdown-item @click="startModifyUserBalance(row)">
                     {{ $t('members.buttons.modify-balance.label') }}
+                  </el-dropdown-item>
+
+                  <el-dropdown-item @click="verifiedUser(row)">
+                    {{ $t('members.buttons.verified.label') }}
                   </el-dropdown-item>
 
                   <el-divider class="!my-1" />

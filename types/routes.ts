@@ -4,5 +4,6 @@ export enum RouteNames {
     DEPOSITS = 'deposits',
     WITHDRAWALS = 'withdrawals',
     DEPOSIT_ACCOUNTS = 'deposit-accounts',
-    TRANSACTIONS = 'transactions'
+    TRANSACTIONS = 'transactions',
+    ORDER = 'order',
 }

@@ -12,7 +12,7 @@ export enum WITHDRAWAL_STATUS {
   REJECTED,
 }
 
-export interface IWithdrawal {
+export interface IWithdrawal extends IMember {
     created_at: string;
     updated_at: string;
     id: number;
@@ -21,6 +21,6 @@ export interface IWithdrawal {
     comments?: string;
     remark?: string;
     reviewed_at?: Date;
-    app_user: IMember;
     approved_by: CreatedBy;
+
 }

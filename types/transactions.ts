@@ -24,3 +24,28 @@ export enum TRANSACTION_TYPES {
   WITHDRAW,
   DEPOSIT,
 }
+
+export interface IOrder {
+  created_at: string;
+  id: number;
+  type: string;
+  quantity: number;
+  stock_code: string;
+  amount: number;
+  user_id: number;
+  is_resolved: boolean;
+  remarks: string;
+  stock_market: string;
+  stock_name: string;
+  zhangting: number;
+  dieting: number;
+  trading_session: string;
+  price: number;
+  fee_rate: number;
+  actual_amount: number;
+  username: string;
+  updated_at: string;
+  real_name: string;
+  agent: string;
+  superior: string;
+}

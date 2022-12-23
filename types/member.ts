@@ -34,7 +34,7 @@ export interface IMember {
     is_playing_board: boolean;
     is_active: boolean;
     is_freeze: boolean;
-    verification_status: number;
+    is_verified: boolean;
     created_by: CreatedBy | null;
     approved_by: ApprovedBy | null;
 }
