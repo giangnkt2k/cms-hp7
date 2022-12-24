@@ -56,5 +56,10 @@ export const useNavigationItems = () => useState<INavigationItem[]>('navigation-
         routeName: RouteNames.ORDER
       }
     ]
+  },
+  {
+    id: v4().toString(),
+    name: 'System config',
+    routeName: RouteNames.SYSTEM_CONFIG
   }
 ])

@@ -2,6 +2,7 @@ import { MaybeRef } from '@vueuse/shared'
 import { ApiRoutes, PaginatedResponse } from '~~/types/api'
 import { TablePageSize } from '~~/types/app-table'
 import { ILoginResponse } from '~~/types/authentication'
+import { IDepositsAndWithdrawals, INewShares, ITradingHours, ITransactionsRate } from '~~/types/configDandW'
 import { DEPOSIT_STATUS, IDeposit } from '~~/types/deposit'
 import { CreateDepositAccountBody, IDepositAccount } from '~~/types/deposit-accounts'
 import { IMember, ModifyUserBalanceBodyRequest } from '~~/types/member'
@@ -114,6 +115,30 @@ export const useApiServices = () => {
     return api.get<PaginatedResponse<IOrder[]>>(ApiRoutes.GET_ORDER, { params: { page, pageSize } })
   }
 
+  const systemConfigService = (param: IDepositsAndWithdrawals) => {
+    return api.patch(ApiRoutes.UPDATE_CONFIG, { deposits_and_withdrawals: param })
+  }
+
+  const systemConfigTransactionsRateService = (param: ITransactionsRate) => {
+    return api.patch(ApiRoutes.UPDATE_CONFIG, { transactions_rate: param })
+  }
+
+  const systemConfigTradingHoursService = (param: ITradingHours) => {
+    return api.patch(ApiRoutes.UPDATE_CONFIG, { trading_hours: param })
+  }
+
+  const systemConfigNewShareService = (param: INewShares) => {
+    return api.patch(ApiRoutes.UPDATE_CONFIG, { new_shares: param })
+  }
+
+  const systemConfigOnlineService = (link: string) => {
+    return api.patch(ApiRoutes.UPDATE_CONFIG, { online_customer_service: link })
+  }
+
+  const systemConfigDetailService = () => {
+    return api.get(ApiRoutes.CONFIG_DETAIL)
+  }
+
   return {
     loginService,
     appUserListService,
@@ -135,6 +160,12 @@ export const useApiServices = () => {
     updateDepositAccountService,
     deleteDepositAccountService,
     transactionListService,
-    orderListService
+    orderListService,
+    systemConfigService,
+    systemConfigDetailService,
+    systemConfigTransactionsRateService,
+    systemConfigTradingHoursService,
+    systemConfigNewShareService,
+    systemConfigOnlineService
   }
 }

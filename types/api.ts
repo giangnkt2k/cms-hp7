@@ -20,7 +20,9 @@ export enum ApiRoutes {
   UPDATE_DEPOSIT_ACCOUNTS = '/deposit-account/update',
   DELETE_DEPOSIT_ACCOUNTS = '/cms/deposit-accounts',
   GET_TRANSACTIONS = '/transaction/list',
-  GET_ORDER = '/order/list/histories'
+  GET_ORDER = '/order/list/histories',
+  UPDATE_CONFIG = 'system-config/update',
+  CONFIG_DETAIL = 'system-config/detail'
 }
 
 export type PaginatedResponse<DataType> = {

@@ -6,4 +6,5 @@ export enum RouteNames {
     DEPOSIT_ACCOUNTS = 'deposit-accounts',
     TRANSACTIONS = 'transactions',
     ORDER = 'order',
+    SYSTEM_CONFIG= 'system-config'
 }

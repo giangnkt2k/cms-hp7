@@ -21,6 +21,10 @@ export const useUtility = () => {
     return $dayjs(date).format(format)
   }
 
+  const timeFormatter = (time: string | number | Date, format = 'HH:mm:ss') => {
+    return $dayjs(time).format(format)
+  }
+
   const getFileUrl = (id: number) => {
     return buildUrl(config.public.LINK_IMG, {
       path: `${ApiRoutes.READ_FILES}/${id}`
@@ -31,6 +35,7 @@ export const useUtility = () => {
     showApiError,
     toMoneyFormat,
     dateFormatter,
-    getFileUrl
+    getFileUrl,
+    timeFormatter
   }
 }
